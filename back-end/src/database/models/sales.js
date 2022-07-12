@@ -1,9 +1,10 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.';
+import User from './users';
 
-export default class Sales extends Model { }
+export default class Sale extends Model { }
 
-Sales.init({
+Sale.init({
   userId: DataTypes.INTEGER,
   sellerId: DataTypes.INTEGER,
   totalPrice: DataTypes.DECIMAL,
@@ -13,8 +14,14 @@ Sales.init({
   status: DataTypes.STRING
 }, {
   sequelize: db,
-  modelName: 'sales',
+  modelName: 'Sale',
   tableName: 'sales',
   underscored: true,
   timestamps: false
 });
+
+User.hasMany(Sale, { foreignKey: 'userId' });
+User.hasMany(Sale, { foreignKey: 'sellerId' });
+
+Sale.belongsToMany(User, { foreignKey: 'userId' });
+Sale.belongsToMany(User, { foreignKey: 'sellerId' });
