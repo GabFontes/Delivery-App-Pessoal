@@ -1,14 +1,23 @@
 import { Model } from 'sequelize';
 import db from '.';
+import Product from './products';
+import Sale from './sales';
 
-export default class SalesProducts extends Model { }
+export default class SaleProduct extends Model { }
 
-SalesProducts.init({
+SaleProduct.init({
   saleId: DataTypes.INTEGER,
   productId: DataTypes.INTEGER,
   quantity: DataTypes.INTEGER
 }, {
   sequelize: db,
-  modelName: 'SalesProducts',
+  modelName: 'SaleProduct',
+  tableName: 'salesproducts',
   underscored: true
 });
+
+Product.hasMany(SaleProduct, { foreignKey: 'productId' });
+Sale.hasMany(SaleProduct, { foreignKey: 'saleId' });
+
+SaleProduct.belongsToMany(Product, { foreignKey: 'productId' });
+SaleProduct.belongsToMany(Sale, { foreignKey: 'saleId' });
