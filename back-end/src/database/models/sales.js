@@ -23,5 +23,5 @@ Sale.init({
 User.hasMany(Sale, { foreignKey: 'userId' });
 User.hasMany(Sale, { foreignKey: 'sellerId' });
 
-Sale.belongsToMany(User, { foreignKey: 'userId' });
-Sale.belongsToMany(User, { foreignKey: 'sellerId' });
+Sale.belongsTo(User, { foreignKey: 'userId' });
+Sale.belongsTo(User, { foreignKey: 'sellerId' });

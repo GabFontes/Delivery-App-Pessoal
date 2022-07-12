@@ -19,5 +19,5 @@ SaleProduct.init({
 Product.hasMany(SaleProduct, { foreignKey: 'productId' });
 Sale.hasMany(SaleProduct, { foreignKey: 'saleId' });
 
-SaleProduct.belongsToMany(Product, { foreignKey: 'productId' });
-SaleProduct.belongsToMany(Sale, { foreignKey: 'saleId' });
+SaleProduct.belongsTo(Product, { foreignKey: 'productId' });
+SaleProduct.belongsTo(Sale, { foreignKey: 'saleId' });
