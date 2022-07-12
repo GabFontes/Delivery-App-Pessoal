@@ -1,9 +1,9 @@
-import { Model } from 'sequelize';
-import db from '.';
-import Product from './products';
-import Sale from './sales';
+const { Model } = require('sequelize');
+const db = require('.');
+const Product = require('./products');
+const Sale = require('./sales');
 
-export default class SaleProduct extends Model { }
+module.exports = class SaleProduct extends Model { }
 
 SaleProduct.init({
   saleId: DataTypes.INTEGER,

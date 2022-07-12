@@ -1,7 +1,14 @@
-import { Model, DataTypes } from 'sequelize';
-import db from '.';
+const { Model, DataTypes } = require('sequelize');
+// const { Sequelize } = require('.');
+const db = require('.');
 
-export default class Product extends Model { }
+// const Model = Sequelize.Model
+// const { Sequelize } = require('.');
+
+// const sequelize = require('.');
+
+class Product extends Model { }
+
 Product.init({
   name: DataTypes.STRING,
   price: DataTypes.DECIMAL,
@@ -11,5 +18,7 @@ Product.init({
   modelName: 'Product',
   tableName: 'products',
   underscored: true,
-  timestamps: false
+  timestamps: false,
 });
+
+module.exports = Product;

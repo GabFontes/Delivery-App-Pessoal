@@ -1,8 +1,8 @@
-import { Model, DataTypes } from 'sequelize';
-import db from '.';
-import User from './users';
+const { Model, DataTypes } = require('sequelize');
+const db = require('.');
+const User = require('./users');
 
-export default class Sale extends Model { }
+module.exports = class Sale extends Model { }
 
 Sale.init({
   userId: DataTypes.INTEGER,

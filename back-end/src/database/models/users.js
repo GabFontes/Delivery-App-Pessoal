@@ -1,7 +1,7 @@
-import { Model, DataTypes } from 'sequelize';
-import db from '.';
+const { Model, DataTypes } = require('sequelize');
+const db = require('.');
 
-export default class User extends Model { }
+module.exports = class User extends Model { }
 
 User.init({
   name: DataTypes.STRING,
@@ -9,7 +9,7 @@ User.init({
   password: DataTypes.STRING,
   role: DataTypes.STRING
 }, {
-  sequelize: db,
+  sequelize: db.sequelize,
   tableName: 'users',
   modelName: 'User',
   timestamps: false,
