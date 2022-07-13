@@ -1,10 +1,11 @@
 const err = require('../utils/error.base');
 
 module.exports = (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   try {
     isEmailValid(email);
     isPasswordValid(password);
+    isNameValid(name);
     next();
   } catch (e) {
     next(e)
@@ -27,6 +28,14 @@ const isPasswordValid = (password) => {
 
   return;
 };
+
+const isNameValid = (name) => {
+  if (!name) throw err('"name" is required', 400)
+  if (name.length < 12) throw err('"name" length must be 12 characters long', 400)
+
+  return;
+}
+
 
 
 
