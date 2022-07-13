@@ -1,7 +1,10 @@
+const getAll = require('./GetAllController');
 const create = require('./CreateUserController');
-const getAll = require('./GetAllUserController')
+const login = require('./LoginController');
+
 
 module.exports = {
   create,
   getAll,
+  login,
 };

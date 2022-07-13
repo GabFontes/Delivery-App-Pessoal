@@ -1,12 +1,11 @@
-const { create } = require('../../services/Users');
+const UserService = require('../../services/Users');
 
-const CreateUserController = async (req, res) => {
+module.exports = CreateUserController = async (req, res, next) => {
   try {
-    const user = await create(req.body);
+    const user = await UserService.create(req.body);
     return res.status(201).json(user);
-  } catch (error) {
-    return res.status(409).json({ message: error.message });
+  } catch (err) {
+    console.log(err);
+    next(err)
   }
 };
-
-module.exports = CreateUserController;
