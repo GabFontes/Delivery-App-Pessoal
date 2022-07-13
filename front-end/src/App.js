@@ -9,6 +9,11 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/" component={ Login } />
+        <Route exact path="/login" component={ Login } />
+        {/* <Route exact path="/register" component={ Login } />
+        <Route exact path="/customer/products" component={ Login } />
+        <Route exact path="/seller/orders" component={ Login } />
+        <Route exact path="/admin/manage" component={ Login } /> */}
         <Route component={ NotFound } />
       </Switch>
     </div>
