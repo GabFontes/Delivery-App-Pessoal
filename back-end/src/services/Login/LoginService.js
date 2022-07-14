@@ -8,7 +8,7 @@ const LoginService = async ({ email, password }) => {
   const user = await User.findOne({ where: { email } });
 
   if (!user) {
-    throw err('Incorrect email/password combination', 401);
+    throw err('Could not found a user with this email', 404);
   }
 
   const hashedPass = md5(password);
