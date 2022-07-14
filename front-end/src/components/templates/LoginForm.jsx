@@ -67,7 +67,7 @@ export default function LoginForm() {
 
     // console.log('role:', data.user.role);
 
-    // // Redirecionamento de rota -------------
+    // Redirecionamento de rota -------------
     // if (data.user.role === 'seller') return history.push('/seller/orders');
 
     // if (data.user.role === 'administrator') return history.push('/admin/manage');
@@ -114,7 +114,7 @@ export default function LoginForm() {
         />
       </form>
       { errorMsg
-        && <div testid="common_login__element-invalid-email">Erro Login</div> }
+        && <div data-testid="common_login__element-invalid-email">Erro Login</div> }
     </div>
   );
 }
