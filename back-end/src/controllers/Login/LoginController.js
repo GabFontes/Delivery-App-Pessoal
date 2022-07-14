@@ -1,8 +1,8 @@
-const UserService = require('../../services/Users');
+const LoginService = require('../../services/Login/LoginService');
 
 module.exports = LoginController = async (req, res, next) => {
   try {
-    const user = await UserService.login(req.body);
+    const user = await LoginService(req.body);
     return res.status(200).json(user);
   } catch (err) {
     console.log(err);
