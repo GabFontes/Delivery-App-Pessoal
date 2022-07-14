@@ -65,7 +65,7 @@ export default function LoginForm() {
 
     // setLoginData(data);
 
-    // console.log('role:', data.user.role);
+    console.log('role:', data.user.role);
 
     // Redirecionamento de rota -------------
     // if (data.user.role === 'seller') return history.push('/seller/orders');
