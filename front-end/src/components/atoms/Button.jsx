@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 export default function Button({
   nameView,
   disabled,
-  testId,
+  testid,
   onClick,
   name,
 }) {
   return (
     <button
-      type="submit"
-      data-testid={ testId }
+      type="button"
+      data-testid={ testid }
       onClick={ onClick }
       disabled={ disabled }
       name={ name }
@@ -22,9 +22,13 @@ export default function Button({
 }
 
 Button.propTypes = {
-  nameView: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  testId: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  nameView: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  testid: PropTypes.string.isRequired,
+};
+
+Button.defaultProps = {
+  disabled: false,
 };
