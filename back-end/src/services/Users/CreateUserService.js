@@ -1,13 +1,13 @@
-const { User } = require('../../database/models');
 const md5 = require('md5');
-const AppError = require("../../utils/AppError");
+const { User } = require('../../database/models');
+const err = require('../../utils/error.base');
 
-module.exports = CreateUserService = async ({ name, email, password, role }) => {
+const CreateUserService = async ({ name, email, password, role }) => {
   const emailExists = await User.findOne({ where: { email } });
 
   if (emailExists) {
-    throw new AppError('Email address already used');
-  };
+    throw err('Email address already used', 400);
+  }
 
   const hashedPass = md5(password);
 
@@ -15,6 +15,8 @@ module.exports = CreateUserService = async ({ name, email, password, role }) => 
     name,
     email,
     password: hashedPass,
-    role
+    role,
   });
 };
+
+module.exports = CreateUserService;
