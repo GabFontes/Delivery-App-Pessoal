@@ -12,7 +12,6 @@ const sinonStubCreated = {
   name: 'Cliente Zé Birita',
   email: 'zebirita@email.com',
   password: '$#zebirita#$',
-  role: 'customer',
 }
 
 const sinonStubReturn = {
@@ -79,7 +78,6 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     .send({
       name: 'Cliente Zé Birita',
       password: '$#zebirita#$',
-      role: 'customer',
     })
 
     expect(chaiHttpResponse.status).to.be.equal(400);
@@ -94,7 +92,6 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
       name: 'Cliente Zé Birita',
       email: 'zebirita',
       password: '$#zebirita#$',
-      role: 'customer',
     })
 
     expect(chaiHttpResponse.status).to.be.equal(400);
@@ -108,7 +105,6 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     .send({
       name: 'Cliente Zé Birita',
       email: 'zebirita@email.com',
-      role: 'customer',
     })
 
     expect(chaiHttpResponse.status).to.be.equal(400);
@@ -123,7 +119,6 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
       name: 'Cliente Zé Birita',
       email: 'zebirita@email.com',
       password: '123',
-      role: 'customer',
     })
 
     expect(chaiHttpResponse.status).to.be.equal(400);
@@ -137,7 +132,6 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     .send({
       email: 'zebirita@email.com',
       password: '$#zebirita#$',
-      role: 'customer',
     })
 
     expect(chaiHttpResponse.status).to.be.equal(400);
@@ -152,41 +146,10 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
       name: 'Cliente',
       email: 'zebirita@email.com',
       password: '$#zebirita#$',
-      role: 'customer',
     })
 
     expect(chaiHttpResponse.status).to.be.equal(400);
     expect(chaiHttpResponse.body).to.deep.equal({ message : '"name" length must be 12 characters long' });
-  });
-
-  it('15. Falha - sem "role"', async () => {
-    chaiHttpResponse = await chai
-    .request(app)
-    .post('/register')
-    .send({
-      name: 'Cliente Zé Birita',
-      email: 'zebirita@email.com',
-      password: '$#zebirita#$',
-    })
-
-    expect(chaiHttpResponse.status).to.be.equal(400);
-    expect(chaiHttpResponse.body).not.to.have.property('user');
-    expect(chaiHttpResponse.body).to.deep.equal({ message : '"role" is required' });
-  });
-
-  it('16. Falha - "role" diferente de administrador, seller ou customer', async () => {
-    chaiHttpResponse = await chai
-    .request(app)
-    .post('/register')
-    .send({
-      name: 'Cliente Zé Birita',
-      email: 'zebirita@email.com',
-      password: '$#zebirita#$',
-      role: 'dev',
-    })
-
-    expect(chaiHttpResponse.status).to.be.equal(400);
-    expect(chaiHttpResponse.body).to.deep.equal({ message : 'Role needs to be an administrator, customer or seller' });
   });
 });
 
@@ -204,14 +167,14 @@ describe('ROTA: POST/register', () => {
       userFoundStub.restore()
     })
 
-    it('17. Falha - email já registrado na rede', async () => {
+    it('15. Falha - email já registrado na rede', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/register')
       .send(sinonStubCreated)
 
 
-      expect(chaiHttpResponse.status).to.be.equal(400);
+      expect(chaiHttpResponse.status).to.be.equal(409);
       expect(chaiHttpResponse.body).to.deep.equal({ message : 'Email address already used' });
     });
   });
