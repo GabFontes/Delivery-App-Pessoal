@@ -6,7 +6,9 @@ export default function Provider({ children }) {
   // USER ----------------------------------------------
   const [userMail, setUserMail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [userName, setUserName] = useState('');
   const [loginData, setLoginData] = useState({});
+  const [registerData, setRegisterData] = useState({});
 
   const contextValue = {
     // USER -------------------
@@ -16,6 +18,10 @@ export default function Provider({ children }) {
     setUserPassword,
     loginData,
     setLoginData,
+    registerData,
+    setRegisterData,
+    userName,
+    setUserName,
   };
 
   return (
