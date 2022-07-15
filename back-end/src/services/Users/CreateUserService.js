@@ -2,7 +2,7 @@ const md5 = require('md5');
 const { User } = require('../../database/models');
 const err = require('../../utils/error.base');
 
-const CreateUserService = async ({ name, email, password, role }) => {
+const CreateUserService = async ({ name, email, password }) => {
   const emailExists = await User.findOne({ where: { email } });
 
   if (emailExists) {
@@ -15,7 +15,7 @@ const CreateUserService = async ({ name, email, password, role }) => {
     name,
     email,
     password: hashedPass,
-    role,
+    role: 'customer',
   });
 };
 
