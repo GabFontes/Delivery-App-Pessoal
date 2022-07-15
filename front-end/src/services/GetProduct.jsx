@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-async function PostProduct() {
+async function GetProduct() {
   try {
-    const url = 'http://localhost:3001/customer/products';
+    const url = 'http://localhost:3001/products';
     const resp = await axios.get(url);
     const data = await resp.data;
     return data;
@@ -11,4 +11,4 @@ async function PostProduct() {
   }
 }
 
-export default PostProduct;
+export default GetProduct;
