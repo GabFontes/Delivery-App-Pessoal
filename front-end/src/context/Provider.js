@@ -4,9 +4,9 @@ import Context from './Context';
 
 export default function Provider({ children }) {
   // USER ----------------------------------------------
-  const [userMail, setUserMail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [userName, setUserName] = useState('');
+  // const [userMail, setUserMail] = useState('');
+  // const [userPassword, setUserPassword] = useState('');
+  // const [userName, setUserName] = useState('');
   const [loginData, setLoginData] = useState({});
   const [registerData, setRegisterData] = useState({});
 
