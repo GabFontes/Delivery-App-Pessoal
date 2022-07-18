@@ -15,9 +15,10 @@ export default function Customer() {
     <div>
       <Header />
 
-      { productsData.map(({ name, price, urlImage }, i) => (
+      { productsData.map(({ name, price, urlImage, id }, i) => (
         <CardsProducts
           key={ i }
+          id={ id }
           imgSrc={ urlImage }
           productName={ name }
           precoProduto={ price }
