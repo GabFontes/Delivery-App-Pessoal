@@ -12,7 +12,7 @@ export default function Provider({ children }) {
   const [userData, setUserData] = useState({});
 
   // PRODUTOS ---------------------------------------------------------------
-  const [productsData, setProductsData] = useProductsApi(login, userData.token);
+  const [productsData, setProductsData] = useProductsApi(login, userData);
 
   const contextValue = {
     // USER -------------------
