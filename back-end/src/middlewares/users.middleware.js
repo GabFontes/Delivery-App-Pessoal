@@ -24,7 +24,6 @@ const isNameValid = (name) => {
 //     throw err('Role needs to be an administrator, customer or seller', 400);
 //   }
 // };
-
 module.exports = (req, res, next) => {
   const {
     email,
