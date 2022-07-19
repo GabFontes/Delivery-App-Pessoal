@@ -11,7 +11,7 @@ export default function CardsProducts({
   return (
     <div>
       <p data-testid={ `customer_products__element-card-price-${id}` }>
-        { precoProduto }
+        { precoProduto.toString().replace(/\./, ',') }
       </p>
       <img
         alt={ productName }
