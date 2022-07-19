@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 import useProductsApi from '../hooks/productHook';
@@ -13,21 +13,17 @@ export default function Provider({ children }) {
   // PRODUTOS ---------------------------------------------------------------
   const [productsData, setProductsData] = useProductsApi(login, userData);
 
-  const contextValue = {
-    // USER -------------------
-    // FORM -------------------
+  const contexMemo = useMemo(() => ({
     setlogin,
     login,
-    // REQUISIÇÃO -------------
     userData,
     setUserData,
-    // PRODUCTS ----------------
     setProductsData,
     productsData,
-  };
+  }), [login, productsData, setProductsData, userData]);
 
   return (
-    <Context.Provider value={ contextValue }>
+    <Context.Provider value={ contexMemo }>
       {children}
     </Context.Provider>
   );
