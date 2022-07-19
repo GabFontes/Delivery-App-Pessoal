@@ -18,12 +18,6 @@ const isNameValid = (name) => {
   if (name.length < 12) throw err('"name" length must be 12 characters long', 400);
 };
 
-// const isRoleValid = (role) => {
-//   if (!role) throw err('"role" is required', 400);
-//   if (role !== 'administrator' && role !== 'seller' && role !== 'customer') {
-//     throw err('Role needs to be an administrator, customer or seller', 400);
-//   }
-// };
 module.exports = (req, res, next) => {
   const {
     email,
@@ -34,7 +28,6 @@ module.exports = (req, res, next) => {
     isEmailValid(email);
     isPasswordValid(password);
     isNameValid(name);
-    // isRoleValid(role);
     next();
   } catch (e) {
     next(e);
