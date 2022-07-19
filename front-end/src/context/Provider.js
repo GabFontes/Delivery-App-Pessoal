@@ -5,29 +5,16 @@ import useProductsApi from '../hooks/productHook';
 
 export default function Provider({ children }) {
   // USER ----------------------------------------------
-  // const [userMail, setUserMail] = useState('');
-  // const [userPassword, setUserPassword] = useState('');
-  // const [userName, setUserName] = useState('');
   const [login, setlogin] = useState(false);
 
   // estados da requisição --------
   const [userData, setUserData] = useState({});
 
   // PRODUTOS ---------------------------------------------------------------
-  const [productsData, setProductsData] = useProductsApi(login, userData.token);
+  const [productsData, setProductsData] = useProductsApi(login, userData);
 
   const contextValue = {
     // USER -------------------
-    // userMail,
-    // setUserMail,
-    // userPassword,
-    // setUserPassword,
-    // loginData,
-    // setLoginData,
-    // registerData,
-    // setRegisterData,
-    // userName,
-    // setUserName,
     // FORM -------------------
     setlogin,
     login,

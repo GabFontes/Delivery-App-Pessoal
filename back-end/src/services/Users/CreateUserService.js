@@ -23,7 +23,7 @@ const CreateUserService = async ({ name, email, password }) => {
     subject: String(newUser.id),
     expiresIn: '1d',
   });
-  return { ...newUser.dataValues, token };
+  return { user: { ...newUser.dataValues }, token };
 };
 
 module.exports = CreateUserService;

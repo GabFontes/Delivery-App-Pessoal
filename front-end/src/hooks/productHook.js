@@ -1,21 +1,25 @@
 import { useState, useEffect } from 'react';
 import GetProduct from '../services/GetProduct';
+import { saveUser } from '../services/setUserLocal';
 
-export default function useProductsApi(isLogged, token) {
+export default function useProductsApi(isLogged, userData) {
   const [products, setproducts] = useState([]);
 
   useEffect(() => {
-    const saveItemsApi = async (token2) => {
+    const saveItemsApi = async (userData2) => {
       try {
-        const responseProducts = await GetProduct(token2);
+        const { user, token } = userData2;
+        const { name, email, role } = user;
+        saveUser({ name, email, role, token });
+        const responseProducts = await GetProduct(token);
         setproducts(responseProducts);
       } catch (e) {
         console.log(e);
       }
     };
     if (isLogged) {
-      saveItemsApi(token);
+      saveItemsApi(userData);
     }
-  }, [token, isLogged]);
+  }, [userData, isLogged]);
   return [products];
 }
