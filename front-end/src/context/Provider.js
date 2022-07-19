@@ -6,7 +6,6 @@ import useProductsApi from '../hooks/productHook';
 export default function Provider({ children }) {
   // USER ----------------------------------------------
   const [login, setlogin] = useState(false);
-  const [registerData, setRegisterData] = useState(false);
 
   // estados da requisição --------
   const [userData, setUserData] = useState({});
@@ -16,8 +15,6 @@ export default function Provider({ children }) {
 
   const contextValue = {
     // USER -------------------
-    registerData,
-    setRegisterData,
     // FORM -------------------
     setlogin,
     login,

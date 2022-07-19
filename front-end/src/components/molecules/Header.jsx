@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Context from '../../context/Context';
+import { deleteKeyLocal } from '../../services/setUserLocal';
 import Button from '../atoms/Button';
 
 export default function Header() {
@@ -29,6 +30,7 @@ export default function Header() {
   };
 
   const handleLogOut = async () => {
+    deleteKeyLocal('user');
     history.push('/login'); // apagar token
   };
 
