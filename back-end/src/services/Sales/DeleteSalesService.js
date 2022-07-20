@@ -1,8 +1,8 @@
-const { Sales } = require('../../database/models');
+const { Sale } = require('../../database/models');
 const err = require('../../utils/error.base');
 
 const DeleteSalesService = async (id) => {
-  const sale = await Sales.delete(id);
+  const sale = await Sale.delete(id);
 
   if (!sale) {
     throw err('Could not found a sale with this id', 404);

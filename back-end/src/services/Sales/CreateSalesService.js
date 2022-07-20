@@ -1,21 +1,19 @@
-const { Sales } = require('../../database/models');
+const { Sale } = require('../../database/models');
+const { SaleProduct } = require('../../database/models');
 
-const CreateSalesService = async ({
-  userId,
-  sellerId,
-  totalPrice,
-  deliveryAddres,
-  deliveryNumber }) => {
-  const sale = await Sales.create({
+const CreateSalesService = async (userSale, products, userId) => {
+  console.log(userSale);
+  const sale = await Sale.create({
+    ...userSale,
     userId,
-    sellerId,
-    totalPrice,
-    deliveryAddres,
-    deliveryNumber,
     saleDate: new Date(),
     status: 'Pendente',
   });
-  return sale;
+
+  const saleProduct = products.map(async ({ productId, quantity }) =>
+    SaleProduct.create({ saleId: sale.dataValues.id, productId, quantity }));
+
+  return { sale, products: await Promise.all(saleProduct) };
 };
 
 module.exports = CreateSalesService;
