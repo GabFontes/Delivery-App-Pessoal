@@ -14,6 +14,7 @@ export default function CardsProducts({
         { precoProduto.toString().replace(/\./, ',') }
       </p>
       <img
+        style={ { width: '100px' } }
         alt={ productName }
         src={ imgSrc }
         data-testid={ `customer_products__img-card-bg-image-${id}` }
