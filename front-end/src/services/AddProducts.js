@@ -8,20 +8,22 @@ if (!readProducts()) {
 
 const removeProductsWithoutQtt = () => {
   const results = readProducts();
-  const newResults = results.filter((prod) => prod.quantity !== 0)
-    .map((prod) => ({
-      ...prod,
-      subTotal: Number(prod.quantity * +prod.price).toFixed(2),
-    }));
+  const newResults = results.filter((prod) => prod.quantity !== 0);
   setProduct(newResults);
 };
 
 // Caso não exista Add new Product
 const notExistProduct = (id, name, price, qtt) => {
   const result = readProducts();
-  const product = { id, name, price, quantity: qtt };
+  const product = {
+    id,
+    name,
+    unityPrice: price,
+    quantity: qtt,
+    subTotal: Number(qtt * +price).toFixed(2) };
   result.push(product);
   setProduct(result);
+  removeProductsWithoutQtt();
 };
 
 // Verifica existencia do produto
@@ -40,7 +42,10 @@ const addQuantProduct = (id) => {
       return prod;
     }
     return prod;
-  });
+  }).map((prod) => ({
+    ...prod,
+    subTotal: Number(prod.quantity * +prod.unityPrice).toFixed(2),
+  }));
   setProduct(update);
   removeProductsWithoutQtt();
 };
@@ -54,7 +59,10 @@ const reduceQuantProduct = (id) => {
       return prod;
     }
     return prod;
-  });
+  }).map((prod) => ({
+    ...prod,
+    subTotal: Number(prod.quantity * +prod.unityPrice).toFixed(2),
+  }));
   setProduct(update);
   removeProductsWithoutQtt();
 };
@@ -77,7 +85,10 @@ const replaceQuantProduct = (id, qtt) => {
       return prod;
     }
     return prod;
-  });
+  }).map((prod) => ({
+    ...prod,
+    subTotal: Number(prod.quantity * +prod.unityPrice).toFixed(2),
+  }));
   setProduct(update);
 };
 
