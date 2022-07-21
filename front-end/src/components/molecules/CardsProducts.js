@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ItemsCounter from '../atoms/ItemsCounter';
 
+// Remover R$ da linha 15 caso o teste falhe
 export default function CardsProducts({
   imgSrc,
   productName,
@@ -11,6 +12,7 @@ export default function CardsProducts({
   return (
     <div>
       <p data-testid={ `customer_products__element-card-price-${id}` }>
+        R$
         { precoProduto.toString().replace(/\./, ',') }
       </p>
       <img
