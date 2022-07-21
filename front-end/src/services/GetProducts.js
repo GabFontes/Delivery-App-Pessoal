@@ -6,6 +6,12 @@ if (!readProducts()) {
   setProduct([]);
 }
 
+const removeProductsWithoutQtt = () => {
+  const results = readProducts();
+  const newResults = results.filter((prod) => prod.quantity !== 0);
+  setProduct(newResults);
+};
+
 // Caso não exista Add new Product
 const notExistProduct = (id, name, price, qtt) => {
   const result = readProducts();
@@ -18,7 +24,6 @@ const notExistProduct = (id, name, price, qtt) => {
 const verifyProductId = (id) => {
   const result = readProducts();
   const exist = result.some((prod) => prod.id === id);
-  console.log(exist);
   return exist;
 };
 
@@ -39,7 +44,6 @@ const addQuantProduct = (id) => {
 const reduceQuantProduct = (id) => {
   const result = readProducts();
   const update = result.map((prod) => {
-    console.log('entrou aqui', id);
     if (prod.id === id) {
       prod.quantity -= 1;
       return prod;
@@ -47,6 +51,7 @@ const reduceQuantProduct = (id) => {
     return prod;
   });
   setProduct(update);
+  removeProductsWithoutQtt();
 };
 
 export const addProduct = (id, name, price, qtt) => {
@@ -56,7 +61,6 @@ export const addProduct = (id, name, price, qtt) => {
 };
 
 export const reduceProduct = (id) => {
-  // console.log(verifyProductId(id));
   reduceQuantProduct(id);
 };
 
@@ -76,4 +80,5 @@ export const inputProduct = (id, name, price, qtt) => {
   // console.log(verifyProductId(id));
   if (!verifyProductId(id)) return notExistProduct(id, name, price, qtt);
   replaceQuantProduct(id, qtt);
+  removeProductsWithoutQtt();
 };
