@@ -7,9 +7,10 @@ const authMiddleware = (req, res, next) => {
     return res.status(401).json({ message: 'Token not found' });
   }
   try {
-    console.log(JWTreader());
     const decoded = jwt.verify(token, JWTreader());
+
     if (decoded) {
+      req.user = Number(decoded.sub);
       next();
     }
   } catch (e) {
