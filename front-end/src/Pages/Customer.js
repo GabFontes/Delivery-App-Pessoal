@@ -8,6 +8,7 @@ export default function Customer() {
   const {
     // userData,
     // login,
+    totalPrice,
     productsData,
   } = useContext(Context);
 
@@ -24,7 +25,8 @@ export default function Customer() {
           precoProduto={ price }
         />
       ))}
-      <h1>Customer</h1>
+      <h3> Total </h3>
+      <h4>{ totalPrice.toFixed(2).toString().replace('.', ',') }</h4>
     </div>
   );
 }
