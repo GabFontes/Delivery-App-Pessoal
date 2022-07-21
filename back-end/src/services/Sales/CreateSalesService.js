@@ -1,8 +1,7 @@
-const { Sale } = require('../../database/models');
-const { SaleProduct } = require('../../database/models');
+const { Sale, SaleProduct } = require('../../database/models');
+const GetSaleByIdService = require('./GetSaleByIdService');
 
 const CreateSalesService = async (userSale, products, userId) => {
-  console.log(userSale);
   const sale = await Sale.create({
     ...userSale,
     userId,
@@ -12,8 +11,12 @@ const CreateSalesService = async (userSale, products, userId) => {
 
   const saleProduct = products.map(async ({ productId, quantity }) =>
     SaleProduct.create({ saleId: sale.dataValues.id, productId, quantity }));
+  
+  await Promise.all(saleProduct);
+  
+  const saleWithProducts = await GetSaleByIdService(sale.dataValues.id);
 
-  return { sale, products: await Promise.all(saleProduct) };
+  return saleWithProducts;
 };
 
 module.exports = CreateSalesService;
