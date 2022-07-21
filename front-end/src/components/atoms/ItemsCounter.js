@@ -38,8 +38,13 @@ export default function ItemsCounter({ id }) {
 
   // Função que altera o valor do estado com base no input
   const handleChange = ({ target: { value } }) => {
-    setNum(value);
     const { id: prodId, name, price } = filterProducts()[0];
+    if (+value < 0) {
+      inputProduct(prodId, name, price, 0);
+      setBtnDisabled(true);
+      return setNum(0);
+    }
+    setNum(value);
     inputProduct(prodId, name, price, +value);
     if (+value === 0) setBtnDisabled(true);
     if (+value > 0) setBtnDisabled(false);
