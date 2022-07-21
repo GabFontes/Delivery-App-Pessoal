@@ -4,7 +4,7 @@ import Context from '../../context/Context';
 import { addProduct, reduceProduct, inputProduct } from '../../services/GetProducts';
 
 export default function ItemsCounter({ id }) {
-  const { productsData } = useContext(Context);
+  const { productsData, setProdCart, prodCart } = useContext(Context);
   const [num, setNum] = useState(0);
   const [btnDisabled, setBtnDisabled] = useState(true);
 
@@ -20,6 +20,7 @@ export default function ItemsCounter({ id }) {
     if (num < maxItems) setNum(Number(num) + 1);
     const { id: prodId, name, price } = filterProducts()[0];
     addProduct(prodId, name, price, num + 1);
+    setProdCart(prodCart + 1);
     setBtnDisabled(false);
   };
 
@@ -28,9 +29,9 @@ export default function ItemsCounter({ id }) {
     if (num > minItems) {
       setNum(num - 1);
       reduceProduct(id);
+      setProdCart(prodCart + 1);
     }
     if (+value === 1) {
-      console.log(value);
       setBtnDisabled(true);
     }
     if (+value > 1) setBtnDisabled(false);
@@ -41,11 +42,13 @@ export default function ItemsCounter({ id }) {
     const { id: prodId, name, price } = filterProducts()[0];
     if (+value < 0) {
       inputProduct(prodId, name, price, 0);
+      setProdCart(prodCart + 1);
       setBtnDisabled(true);
       return setNum(0);
     }
     setNum(value);
     inputProduct(prodId, name, price, +value);
+    setProdCart(prodCart + 1);
     if (+value === 0) setBtnDisabled(true);
     if (+value > 0) setBtnDisabled(false);
   };
