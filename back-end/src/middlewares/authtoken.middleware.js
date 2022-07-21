@@ -8,9 +8,11 @@ const authMiddleware = (req, res, next) => {
   }
   try {
     const decoded = jwt.verify(token, JWTreader());
-
     if (decoded) {
-      req.user = Number(decoded.sub);
+      req.user = {
+        id: Number(decoded.sub),
+        role: decoded.role,
+      };
       next();
     }
   } catch (e) {

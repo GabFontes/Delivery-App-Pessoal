@@ -19,7 +19,9 @@ const CreateUserService = async ({ name, email, password }) => {
     role: 'customer',
   });
 
-  const token = sign({}, JWTreader(), {
+  const token = sign({
+    role: newUser.role,
+  }, JWTreader(), {
     subject: String(newUser.id),
     expiresIn: '1d',
   });
