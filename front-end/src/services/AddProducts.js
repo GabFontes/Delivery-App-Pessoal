@@ -8,7 +8,11 @@ if (!readProducts()) {
 
 const removeProductsWithoutQtt = () => {
   const results = readProducts();
-  const newResults = results.filter((prod) => prod.quantity !== 0);
+  const newResults = results.filter((prod) => prod.quantity !== 0)
+    .map((prod) => ({
+      ...prod,
+      subTotal: Number(prod.quantity * +prod.price).toFixed(2),
+    }));
   setProduct(newResults);
 };
 
@@ -38,6 +42,7 @@ const addQuantProduct = (id) => {
     return prod;
   });
   setProduct(update);
+  removeProductsWithoutQtt();
 };
 
 // reduz a quantidade do produto

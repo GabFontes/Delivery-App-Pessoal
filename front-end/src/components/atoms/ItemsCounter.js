@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
 import Context from '../../context/Context';
-import { addProduct, reduceProduct, inputProduct } from '../../services/GetProducts';
+import { addProduct, reduceProduct, inputProduct } from '../../services/AddProducts';
 
 export default function ItemsCounter({ id }) {
   const { productsData, setProdCart, prodCart } = useContext(Context);

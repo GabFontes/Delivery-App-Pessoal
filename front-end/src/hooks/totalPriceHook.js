@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { readProducts } from '../services/GetProducts';
+import { readProducts } from '../services/AddProducts';
 
 export default function useUpdatePriceApi(prod) {
   const [totalPrice, setTotalPrice] = useState(0);
