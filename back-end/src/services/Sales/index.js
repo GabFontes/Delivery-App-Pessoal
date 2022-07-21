@@ -1,5 +1,5 @@
 const create = require('./CreateSalesService');
-const getAll = require('./GetAllSalesService');
+const getAll = require('./GetAllSalesByUserIdService');
 const deleted = require('./DeleteSalesService');
 const getById = require('./GetSaleByIdService');
 

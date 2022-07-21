@@ -1,7 +1,7 @@
 const { Sale, Product, User } = require('../../database/models');
 const err = require('../../utils/error.base');
 
-const GetSaleByIdService = async (id) => {
+const GetAllSalesByUserIdService = async (id) => {
   const sale = await Sale.findByPk(id, {
     include: [
       { model: User, as: 'user', attributes: { exclude: ['password'] } },
@@ -17,4 +17,4 @@ const GetSaleByIdService = async (id) => {
   return sale;
 };
 
-module.exports = GetSaleByIdService;
+module.exports = GetAllSalesByUserIdService;
