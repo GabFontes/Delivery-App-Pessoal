@@ -59,7 +59,7 @@ export default function ItemsCounter({ id }) {
         type="button"
         value={ num }
         onClick={ decrementNum }
-        data-testid={ `customer_products__button-card-add-item-${id}` }
+        data-testid={ `customer_products__button-card-rm-item-${id}` }
         disabled={ btnDisabled }
       >
         -
@@ -74,7 +74,7 @@ export default function ItemsCounter({ id }) {
         type="button"
         value={ num }
         onClick={ incrementNum }
-        data-testid={ `customer_products__button-card-rm-item-${id}` }
+        data-testid={ `customer_products__button-card-add-item-${id}` }
       >
         +
 
