@@ -1,9 +1,10 @@
 const SalesService = require('../../services/Sales');
 
-const DeleteSalesController = async (req, res, next) => {
+const UpdateSalesController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const sale = await SalesService.delete(id);
+    const { status } = req.body;
+    const sale = await SalesService.update(id, status);
     return res.status(200).json(sale);
   } catch (err) {
     console.log(err);
@@ -11,4 +12,4 @@ const DeleteSalesController = async (req, res, next) => {
   }
 };
 
-module.exports = DeleteSalesController;
+module.exports = UpdateSalesController;
