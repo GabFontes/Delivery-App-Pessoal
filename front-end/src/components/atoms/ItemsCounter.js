@@ -9,7 +9,7 @@ export default function ItemsCounter({ id }) {
   const [btnDisabled, setBtnDisabled] = useState(true);
 
   // Constantes com o máximo e o mínimo de itens no estado
-  const maxItems = 10;
+  const maxItems = 30;
   const minItems = 0;
 
   // Função filter id product unique
@@ -19,17 +19,21 @@ export default function ItemsCounter({ id }) {
   const incrementNum = () => {
     if (num < maxItems) setNum(Number(num) + 1);
     const { id: prodId, name, price } = filterProducts()[0];
-    // console.log('oneProduct -', result);
     addProduct(prodId, name, price, num + 1);
-    if (+num > 0) setBtnDisabled(false);
+    setBtnDisabled(false);
   };
 
   // Função que decrementa o número
-  const decrementNum = () => {
-    if (num > minItems) setNum(num - 1);
-    if (+num === 1) setBtnDisabled(true);
-    if (+num > 0) setBtnDisabled(false);
-    reduceProduct(id);
+  const decrementNum = ({ target: { value } }) => {
+    if (num > minItems) {
+      setNum(num - 1);
+      reduceProduct(id);
+    }
+    if (+value === 1) {
+      console.log(value);
+      setBtnDisabled(true);
+    }
+    if (+value > 1) setBtnDisabled(false);
   };
 
   // Função que altera o valor do estado com base no input
@@ -45,6 +49,7 @@ export default function ItemsCounter({ id }) {
     <div>
       <button
         type="button"
+        value={ num }
         onClick={ decrementNum }
         data-testid={ `customer_products__button-card-add-item-${id}` }
         disabled={ btnDisabled }
@@ -59,6 +64,7 @@ export default function ItemsCounter({ id }) {
       />
       <button
         type="button"
+        value={ num }
         onClick={ incrementNum }
         data-testid={ `customer_products__button-card-rm-item-${id}` }
       >
