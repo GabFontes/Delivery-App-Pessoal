@@ -1,6 +1,7 @@
 export const readProducts = () => JSON.parse(localStorage.getItem('products'));
 
-const setProduct = (product) => localStorage.setItem('products', JSON.stringify(product));
+export const setProduct = (product) => localStorage
+  .setItem('products', JSON.stringify(product));
 
 if (!readProducts()) {
   setProduct([]);

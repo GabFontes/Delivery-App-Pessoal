@@ -17,7 +17,9 @@ const LoginService = async ({ email, password }) => {
     throw err('Incorrect email/password combination', 401);
   }
 
-  const token = sign({}, JWTreader(), {
+  const token = sign({
+    role: user.role,
+  }, JWTreader(), {
     subject: String(user.id),
     expiresIn: '1d',
   });

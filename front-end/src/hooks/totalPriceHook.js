@@ -6,10 +6,8 @@ export default function useUpdatePriceApi(prod) {
   useEffect(() => {
     const calculeTotalPrice = () => {
       const products = readProducts();
-      console.log(products);
       const total = products
         .reduce((acc, act) => (Number(act.subTotal) + acc), 0);
-      console.log(total);
       setTotalPrice(total);
     };
     if (prod > 0) {
