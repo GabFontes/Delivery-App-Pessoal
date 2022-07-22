@@ -64,9 +64,31 @@ const CreateSaleResponse = {
   ],
 };
 
+const getAllSalesByUserIdResponse = [{
+  id: 3,
+  userId: 4,
+  sellerId: 2,
+  totalPrice: '20.00',
+  deliveryAddress: 'Rua dos Tolod, Nº9',
+  deliveryNumber: '000',
+  saleDate: '2022-07-21T19:13:31.000Z',
+  status: 'Pendente',
+},
+{
+  id: 4,
+  userId: 4,
+  sellerId: 2,
+  totalPrice: '20.00',
+  deliveryAddress: 'Rua dos Tolod, Nº90',
+  deliveryNumber: '000',
+  saleDate: '2022-07-21T19:18:49.000Z',
+  status: 'Pendente',
+}];
+
 
 module.exports = {
   CreateSaleRequest,
   saleCreatedResponse,
-  CreateSaleResponse
+  CreateSaleResponse,
+  getAllSalesByUserIdResponse
 }
