@@ -1,11 +1,11 @@
 const create = require('./CreateSalesService');
 const getAll = require('./GetAllSalesByUserIdService');
-const deleted = require('./DeleteSalesService');
+const update = require('./UpdateSalesService');
 const getById = require('./GetSaleByIdService');
 
 module.exports = {
   create,
   getAll,
-  deleted,
+  update,
   getById,
 };
