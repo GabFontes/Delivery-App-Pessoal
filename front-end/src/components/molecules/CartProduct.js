@@ -12,29 +12,52 @@ export default function ProductCart({
   id,
 }) {
   return (
-    <div style={ { display: 'flex' } }>
-      <p>
-        { indice }
-      </p>
-      <h4 data-testid={ `customer_checkout__element-order-table-name-${indice}` }>
-        { productName }
-      </h4>
-      <h4 data-testid={ `customer_checkout__element-order-table-quantity-${indice}` }>
-        { quantity }
-      </h4>
-      <h4 data-testid={ `customer_checkout__element-order-table-unit-price-${indice}` }>
-        { price }
-      </h4>
-      <h4 data-testid={ `customer_checkout__element-order-table-unit-price-${indice}` }>
-        { subtotal }
-      </h4>
-      <Button
-        nameView="Remover"
-        disabled={ false }
-        testid={ `customer_checkout__element-order-table-remove-${indice}` }
-        onClick={ () => click(id) }
-        name="removeButton"
-      />
+    <div>
+      <div style={ { display: 'flex' } }>
+        <p>
+          Item
+        </p>
+        <p>
+          Descrição
+        </p>
+        <p>
+          Quantidade
+        </p>
+        <p>
+          Valor Unitário
+        </p>
+        <p>
+          Sub-total
+        </p>
+        <p>
+          Remover Item
+        </p>
+      </div>
+
+      <div style={ { display: 'flex' } }>
+        <h4>
+          { indice }
+        </h4>
+        <h4 data-testid={ `customer_checkout__element-order-table-name-${indice}` }>
+          { productName }
+        </h4>
+        <h4 data-testid={ `customer_checkout__element-order-table-quantity-${indice}` }>
+          { quantity }
+        </h4>
+        <h4 data-testid={ `customer_checkout__element-order-table-unit-price-${indice}` }>
+          { price }
+        </h4>
+        <h4 data-testid={ `customer_checkout__element-order-table-sub-total-${indice}` }>
+          { subtotal }
+        </h4>
+        <Button
+          nameView="Remover"
+          disabled={ false }
+          testid={ `customer_checkout__element-order-table-remove-${indice}` }
+          onClick={ () => click(id) }
+          name="removeButton"
+        />
+      </div>
     </div>
   );
 }
