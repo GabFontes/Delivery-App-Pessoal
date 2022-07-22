@@ -3,23 +3,11 @@ const chaiHttp = require('chai-http');
 const chai = require('chai');
 const sinon = require('sinon');
 const { User } = require('../database/models');
+const { createdUser, registerUser, modelUserReturn } = require('./mocks/users.mock');
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
-
-const sinonStubCreated = {
-  name: 'Cliente Zé Birita',
-  email: 'zebirita@email.com',
-  password: '$#zebirita#$',
-}
-
-const sinonStubReturn = {
-  name: 'Cliente Zé Birita',
-  email: 'zebirita@email.com',
-  password: '1c37466c159755ce1fa181bd247cb925',
-  role: 'customer',
-}
 
 describe('ROTA: POST/register', () => {
   describe('SUCESSO - É possível criar um novo usuário', () => {
@@ -30,7 +18,7 @@ describe('ROTA: POST/register', () => {
 
     before(async () => {
       userFoundStub = sinon.stub(User, "findOne").resolves(null);
-      userCreatedStub = sinon.stub(User, "create").resolves(sinonStubReturn);
+      userCreatedStub = sinon.stub(User, "create").resolves(modelUserReturn);
     })
 
     after(() => {
@@ -42,15 +30,18 @@ describe('ROTA: POST/register', () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/register')
-      .send(sinonStubCreated)
+      .send(registerUser)
 
 
       expect(chaiHttpResponse.status).to.be.equal(201);
-      expect(chaiHttpResponse.body).to.have.property('name');
-      expect(chaiHttpResponse.body).to.have.property('email');
-      expect(chaiHttpResponse.body).to.have.property('password');
-      expect(chaiHttpResponse.body).to.have.property('role');
-      expect(chaiHttpResponse.body).to.deep.equal(sinonStubReturn);
+      expect(chaiHttpResponse.body).to.have.property('user');
+      expect(chaiHttpResponse.body.user).to.have.property('name');
+      expect(chaiHttpResponse.body.user).to.have.property('email');
+      expect(chaiHttpResponse.body.user).to.have.property('password');
+      expect(chaiHttpResponse.body.user).to.have.property('role');
+      expect(chaiHttpResponse.body).to.have.property('token');
+
+      // expect(chaiHttpResponse.body).to.deep.equal(createdUser);
     });
   });
 });
@@ -62,7 +53,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
   let userCreatedStub
 
   before(async () => {
-    userFoundStub = sinon.stub(User, "findOne").resolves(sinonStubReturn);
+    userFoundStub = sinon.stub(User, "findOne").resolves(createdUser);
     userCreatedStub = sinon.stub(User, "create").resolves(null);
   })
 
@@ -160,7 +151,7 @@ describe('ROTA: POST/register', () => {
     let userFoundStub;
 
     before(async () => {
-      userFoundStub = sinon.stub(User, "findOne").resolves(sinonStubReturn);
+      userFoundStub = sinon.stub(User, "findOne").resolves(createdUser);
     })
 
     after(() => {
@@ -171,7 +162,7 @@ describe('ROTA: POST/register', () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/register')
-      .send(sinonStubCreated)
+      .send(registerUser)
 
 
       expect(chaiHttpResponse.status).to.be.equal(409);
