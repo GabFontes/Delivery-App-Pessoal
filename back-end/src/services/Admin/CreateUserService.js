@@ -4,7 +4,7 @@ const { User } = require('../../database/models');
 const err = require('../../utils/error.base');
 const JWTreader = require('../../utils/jwt.reader');
 
-const CreateUserService = async ({ name, email, password }) => {
+const CreateUserService = async ({ name, email, password, role }) => {
   const emailExists = await User.findOne({ where: { email } });
   if (emailExists) {
     throw err('Email address already used', 409);
@@ -16,7 +16,7 @@ const CreateUserService = async ({ name, email, password }) => {
     name,
     email,
     password: hashedPass,
-    role: 'customer',
+    role,
   });
 
   const token = sign({

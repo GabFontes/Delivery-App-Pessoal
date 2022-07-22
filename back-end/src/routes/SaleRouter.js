@@ -7,6 +7,6 @@ const saleRouter = Router();
 saleRouter.get('/', AuthMiddleware, SalesController.getAll);
 saleRouter.get('/:id', AuthMiddleware, SalesController.getById);
 saleRouter.post('/', AuthMiddleware, SalesController.create);
-saleRouter.delete('/', SalesController.deleted);
+saleRouter.patch('/:id', AuthMiddleware, SalesController.update);
 
 module.exports = saleRouter;
