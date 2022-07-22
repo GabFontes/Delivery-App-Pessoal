@@ -10,28 +10,32 @@ export default function CardDetails({
   quantity,
   price,
   subtotal,
+  orderNumber,
+  sellerName,
+  orderDate,
+  deliveryStatus,
   // click,
   // id,
 }) {
   // ALTERAR DATA TESTID
+  const dataStats = 'customer_order_details__element-order-details-label-delivery-status';
   return (
     <div>
 
       <div style={ { display: 'flex' } }>
         <h2 data-testid="customer_order_details__element-order-table-item-number">
-          Numero do Pedido
+          { orderNumber }
         </h2>
-        <h2 data-testid="customer_order_details__element-order-table-item-number">
-          Nome Vendedora
+        <h2 data-testid="customer_order_details__element-order-details-label-seller-name">
+          P. Vend:
+          {' '}
+          { sellerName }
         </h2>
-        <h2 data-testid="customer_order_details__element-order-table-item-number">
-          Data
+        <h2 data-testid="customer_order_details__element-order-details-label-order-date">
+          { orderDate }
         </h2>
-        <h2 data-testid="customer_order_details__element-order-table-item-number">
-          Status
-        </h2>
-        <h2>
-          Status
+        <h2 data-testid={ dataStats }>
+          { deliveryStatus }
         </h2>
         <Button
           nameView="MARCAR COMO ENTREGUE"
@@ -84,6 +88,10 @@ export default function CardDetails({
 }
 
 CardDetails.propTypes = {
+  orderNumber: PropTypes.string.isRequired,
+  sellerName: PropTypes.string.isRequired,
+  orderDate: PropTypes.string.isRequired,
+  deliveryStatus: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   subtotal: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
