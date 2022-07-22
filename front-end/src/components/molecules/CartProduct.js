@@ -1,22 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../atoms/Button';
-import { readProducts, setProduct } from '../../services/AddProducts';
 
-// Remover R$ da linha 15 caso o teste falhe
 export default function ProductCart({
   productName,
   quantity,
   price,
   subtotal,
   indice,
+  click,
+  id,
 }) {
-  const handleClick = (index) => {
-    const products = readProducts();
-    const updatedProducts = products.splice(index, 1);
-    setProduct(updatedProducts);
-  };
-
   return (
     <div style={ { display: 'flex' } }>
       <p>
@@ -38,7 +32,7 @@ export default function ProductCart({
         nameView="Remover"
         disabled={ false }
         testid={ `customer_checkout__element-order-table-remove-${indice}` }
-        onClick={ () => handleClick(indice) }
+        onClick={ () => click(id) }
         name="removeButton"
       />
     </div>
@@ -48,7 +42,9 @@ export default function ProductCart({
 ProductCart.propTypes = {
   price: PropTypes.string.isRequired,
   subtotal: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
   productName: PropTypes.string.isRequired,
   indice: PropTypes.number.isRequired,
+  click: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
