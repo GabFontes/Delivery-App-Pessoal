@@ -2,7 +2,7 @@ const app = require('../api/app');
 const chaiHttp = require('chai-http');
 const chai = require('chai');
 const sinon = require('sinon');
-const { Sale, SaleProduct } = require('../database/models');
+const { Sale } = require('../database/models');
 const { getAllSalesByUserIdResponse } = require('./mocks/sales.mock');
 const { sucessfullToken, failedToken } = require('./mocks/token.mock');
 
@@ -10,8 +10,8 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('ROTA: POST/sales', () => {
-  describe('SUCESSO - É possível criar uma nova venda', () => {
+describe('ROTA: GET/sales', () => {
+  describe('SUCESSO - É possível consultar todas as vendas pelo usuário', () => {
    
     let chaiHttpResponse;
     let SaleFoundAllStub;
@@ -24,7 +24,7 @@ describe('ROTA: POST/sales', () => {
       SaleFoundAllStub.restore();
     })
 
-    it('23. Sucesso - É possível criar uma nova venda', async () => {
+    it('23. Sucesso - É possível consultar todas as vendas pelo usuário', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales')
@@ -56,8 +56,8 @@ describe('ROTA: POST/sales', () => {
   });
 });
 
-describe('ROTA: POST/sales', () => {
-  describe('FALHA - token - não é possível criar uma nova venda', () => {
+describe('ROTA: GET/sales', () => {
+  describe('FALHA - token - não é possível fazer a requisição para as vendas', () => {
    
     let chaiHttpResponse;
 
