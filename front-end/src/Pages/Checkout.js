@@ -1,6 +1,6 @@
 import React from 'react';
 import FinalOrder from '../components/templates/FinalOrder';
-// import FinishAdressForm from '../components/templates/FinishAdressForm';
+import FinishAdressForm from '../components/templates/FinishAdressForm';
 // import Header from '../components/molecules/Header';
 
 export default function Checkout() {
@@ -8,7 +8,7 @@ export default function Checkout() {
     <div>
       {/* <Header /> */}
       <FinalOrder />
-      {/* <FinishAdressForm /> */}
+      <FinishAdressForm />
     </div>
   );
 }

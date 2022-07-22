@@ -4,7 +4,7 @@ import InputText from '../atoms/InputText';
 import Button from '../atoms/Button';
 import SelectInput from '../atoms/SellerSelectInput';
 import PostSale from '../../services/PostSale';
-import GetSellers from '../../services/GetSellers';
+// import GetSellers from '../../services/GetSellers';
 import Context from '../../context/Context';
 import { readProducts } from '../../services/AddProducts';
 
@@ -14,8 +14,8 @@ export default function FinishOrderForm() {
     totalPrice,
   } = React.useContext(Context);
   // const [cartItens, setCartItens] = useState(readProducts());
-  const [deliveryAddress, setDeliveryAddress] = React.useState();
-  const [deliveryNumber, setDeliveryNumber] = React.useState();
+  const [deliveryAddress, setDeliveryAddress] = React.useState('');
+  const [deliveryNumber, setDeliveryNumber] = React.useState('');
   const [sellerId, setSellerId] = React.useState();
 
   // CONSTANTES ---------------------------------
@@ -41,13 +41,14 @@ export default function FinishOrderForm() {
     setSellerId(value);
   };
 
-  const selectSeller = async () => {
-    const data = await GetSellers(token);
-    if (!data.length) {
-      return console.log('erro-selectSeller');
-    }
-    return data;
-  };
+  // const selectSeller = async () => {
+  //   const data = await GetSellers(token);
+  //   if (!data.length) {
+  //     return console.log('erro-selectSeller');
+  //   }
+  //   console.log(data);
+  //   return data;
+  // };
 
   // Requisição post --------------
   const handleFormSend = async () => {
@@ -65,6 +66,7 @@ export default function FinishOrderForm() {
         },
       ],
     }, token);
+    console.log(saleDetails);
 
     if (!saleDetails) {
       return console.log('erro-handleFormSend');
@@ -79,7 +81,7 @@ export default function FinishOrderForm() {
       <form action="">
 
         <SelectInput
-          sellerOptions={ selectSeller }
+          sellerOptions="Fulana Pereira"
           sellerValue={ handleSeller }
         />
         <InputText
