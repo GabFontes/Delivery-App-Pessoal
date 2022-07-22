@@ -8,13 +8,8 @@ import PostRegister from '../../services/PostRegister';
 export default function RegisterForm() {
   // ESTADOS -----------------------------------
   const {
-    userMail,
-    userName,
-    setUserName,
-    setUserMail,
-    userPassword,
-    setUserPassword,
-    setRegisterData,
+    setlogin,
+    setUserData,
   } = useContext(Context);
 
   // CONSTANTES ---------------------------------
@@ -24,6 +19,9 @@ export default function RegisterForm() {
   const history = useHistory();
   const [btnRegister, setBtnRegister] = useState(true);
   const [errorMsg, setErrorMsg] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
 
   // FUNÇÕES -------------------------------------
   const mailValidator = (email) => {
@@ -31,48 +29,50 @@ export default function RegisterForm() {
     return mailRegex.test(email);
   };
 
-  const btnChange = () => {
-    if (mailValidator(userMail)
+  // todas as vezes que a pagina é carregada o setErrorMsg se altera para false
+  useEffect(() => {
+    setErrorMsg(false);
+  }, []);
+
+  const handleName = ({ target: { value } }) => {
+    setUserName(value);
+    if (mailValidator(userEmail)
+      && userPassword.length >= minPassCaracs && value.length >= minNameCaracs) {
+      return setBtnRegister(false);
+    }
+    return setBtnRegister(true);
+  };
+
+  const handleEmail = ({ target: { value } }) => {
+    setUserEmail(value);
+    if (mailValidator(value)
       && userPassword.length >= minPassCaracs && userName.length >= minNameCaracs) {
       return setBtnRegister(false);
     }
     return setBtnRegister(true);
   };
 
-  useEffect(() => {
-    btnChange();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userMail, userPassword, userName]);
-
-  // todas as vezes que a pagina é carregada o setErrorMsg se altera para false
-  useEffect(() => {
-    setErrorMsg(false);
-  }, []);
-
-  const handleName = (e) => {
-    setUserName(e.target.value);
-  };
-
-  const handleEmail = (e) => {
-    setUserMail(e.target.value);
-  };
-
-  const handlePassword = (e) => {
-    setUserPassword(e.target.value);
+  const handlePassword = ({ target: { value } }) => {
+    setUserPassword(value);
+    if (mailValidator(userEmail)
+      && value.length >= minPassCaracs && userName.length >= minNameCaracs) {
+      return setBtnRegister(false);
+    }
+    return setBtnRegister(true);
   };
 
   const handleRegister = async () => {
     // Requisição post --------------
     const data = await PostRegister({
-      name: userName, email: userMail, password: userPassword });
+      name: userName, email: userEmail, password: userPassword });
 
-    if (data.id) {
-      // Redirecionamento de rota -------------
-      setRegisterData(data);
-      history.push('/customer/products');
+    if (!data.user) {
+      return setErrorMsg(true);
     }
-
-    setErrorMsg(true);
+    // Redirecionamento de rota -------------
+    setUserData(data);
+    setlogin(true);
+    history.push('/customer/products');
   };
 
   // -------------------------------------------------
@@ -92,7 +92,7 @@ export default function RegisterForm() {
           type="email"
           name="userMail"
           placeholder="Email"
-          value={ userMail }
+          value={ userEmail }
           onChange={ handleEmail }
         />
         <InputText

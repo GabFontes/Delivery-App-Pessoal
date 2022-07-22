@@ -1,31 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
+import useProductsApi from '../hooks/productHook';
+import useUpdatePriceApi from '../hooks/totalPriceHook';
 
 export default function Provider({ children }) {
   // USER ----------------------------------------------
-  const [userMail, setUserMail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [userName, setUserName] = useState('');
-  const [loginData, setLoginData] = useState({});
-  const [registerData, setRegisterData] = useState({});
+  const [login, setlogin] = useState(false);
 
-  const contextValue = {
-    // USER -------------------
-    userMail,
-    setUserMail,
-    userPassword,
-    setUserPassword,
-    loginData,
-    setLoginData,
-    registerData,
-    setRegisterData,
-    userName,
-    setUserName,
-  };
+  // estados da requisição --------
+  const [userData, setUserData] = useState({});
+
+  // PRODUTOS ---------------------------------------------------------------
+  const [prodCart, setProdCart] = useState(0);
+  const [productsData, setProductsData] = useProductsApi(login, userData);
+  const [totalPrice, setTotalPrice] = useUpdatePriceApi(prodCart);
+
+  const contexMemo = useMemo(() => ({
+    totalPrice,
+    setTotalPrice,
+    setProdCart,
+    prodCart,
+    setlogin,
+    login,
+    userData,
+    setUserData,
+    setProductsData,
+    productsData,
+  }), [
+    login, prodCart, productsData, setProductsData, setTotalPrice, totalPrice, userData]);
 
   return (
-    <Context.Provider value={ contextValue }>
+    <Context.Provider value={ contexMemo }>
       {children}
     </Context.Provider>
   );
