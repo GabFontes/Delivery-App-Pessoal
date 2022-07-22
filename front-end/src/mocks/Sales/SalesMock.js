@@ -7,7 +7,6 @@ const getAllSalesByUserIdResponse = [{
   userId: 4,
   sellerId: 2,
   totalPrice: '20.00',
-  // eslint-disable-next-line sonarjs/no-duplicate-string
   deliveryAddress: 'Rua dos Tolod, Nº9',
   deliveryNumber: '000',
   saleDate: '2022-07-21T19:13:31.000Z',
@@ -18,7 +17,7 @@ const getAllSalesByUserIdResponse = [{
   userId: 4,
   sellerId: 2,
   totalPrice: '20.00',
-  deliveryAddress: 'Rua dos Tolod, Nº9',
+  deliveryAddress: 'Rua dos Tolod, Nº90',
   deliveryNumber: '000',
   saleDate: '2022-07-21T19:18:49.000Z',
   status: 'Pendente',
@@ -35,7 +34,7 @@ const getSaleByIdResponse = {
   userId: 4,
   sellerId: 2,
   totalPrice: '20.00',
-  deliveryAddress: 'Rua dos Tolod, Nº9',
+  deliveryAddress: 'Rua dos Tolod, Nº90',
   deliveryNumber: '000',
   saleDate: '2022-07-21T19:18:49.000Z',
   status: 'Pendente',
@@ -82,7 +81,7 @@ const CreateSaleRequest = {
   sale: {
     sellerId: 2,
     totalPrice: '20.00',
-    deliveryAddress: 'Rua dos Tolod, Nº9',
+    deliveryAddress: 'Rua dos Tolod, Nº909',
     deliveryNumber: '000',
   },
   products: [{
@@ -100,7 +99,7 @@ const CreateSaleResponse = {
   userId: 4,
   sellerId: 2,
   totalPrice: '20.00',
-  deliveryAddress: 'Rua dos Tolod, Nº9',
+  deliveryAddress: 'Rua dos Tolod, Nº909',
   deliveryNumber: '000',
   saleDate: '2022-07-21T21:27:47.000Z',
   status: 'Pendente',
