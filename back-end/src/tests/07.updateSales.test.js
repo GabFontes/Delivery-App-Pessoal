@@ -2,43 +2,38 @@ const app = require('../api/app');
 const chaiHttp = require('chai-http');
 const chai = require('chai');
 const sinon = require('sinon');
-const { Sale, SaleProduct } = require('../database/models');
-const {  CreateSaleRequest,
-  saleCreatedResponse,
-  CreateSaleResponse } = require('./mocks/sales.mock');
+const { Sale } = require('../database/models');
+const { CreateSaleResponse, UpdateSalesRequest, UpdateSalesResponse } = require('./mocks/sales.mock');
 const { sucessfullToken, failedToken } = require('./mocks/token.mock');
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('ROTA: POST/sales', () => {
-  describe('SUCESSO - É possível criar uma nova venda', () => {
+describe('ROTA: PATCH/sales/:id', () => {
+  describe('SUCESSO -  É possível atualizar uma venda pelo saleID', () => {
    
     let chaiHttpResponse;
-    let saleCreatedStub;
-    let saleProductCreatedStub;
     let SaleFoundByPkStub;
+    let updateSaleStub;
 
     before(async () => {
-      saleCreatedStub = sinon.stub(Sale, "create").resolves(saleCreatedResponse);
-      saleProductCreatedStub = sinon.stub(SaleProduct, "create").resolves({ok: 'ok'});
       SaleFoundByPkStub = sinon.stub(Sale, "findByPk").resolves(CreateSaleResponse); 
+      updateSaleStub = sinon.stub(Sale, "update").resolves();
+
     })
 
     after(() => {
-      saleCreatedStub.restore()
-      saleProductCreatedStub.restore();
       SaleFoundByPkStub.restore();
+      updateSaleStub.restore();
     })
 
-    it('20. Sucesso - É possível criar uma nova venda', async () => {
+    it('32. Sucesso - É possível atualizar uma venda pelo saleID', async () => {
       chaiHttpResponse = await chai
       .request(app)
-      .post('/sales')
+      .patch('/sales/1')
       .set('authorization', sucessfullToken)
-      .send(CreateSaleRequest)
-
+      .send(UpdateSalesRequest)
 
       expect(chaiHttpResponse.status).to.be.equal(200);
       expect(chaiHttpResponse.body).to.have.property('id');
@@ -54,81 +49,65 @@ describe('ROTA: POST/sales', () => {
       expect(chaiHttpResponse.body.user).to.have.property('role');
       expect(chaiHttpResponse.body).to.have.property('products');
       expect(chaiHttpResponse.body.products).to.be.an('array');
+     
     });
   });
 });
 
-describe('ROTA: POST/sales', () => {
-  describe('FALHA - token - não é possível criar uma nova venda', () => {
+describe('ROTA: PATCH/sales/:id', () => {
+  describe('FALHA - token - não é possível atualizar a venda pelo saleID', () => {
    
     let chaiHttpResponse;
-    let saleCreatedStub;
-    let saleProductCreatedStub;
-    let SaleFoundByPkStub;
 
-    before(async () => {
-      saleCreatedStub = sinon.stub(Sale, "create").resolves(saleCreatedResponse);
-      saleProductCreatedStub = sinon.stub(SaleProduct, "create").resolves({ok: 'ok'});
-      SaleFoundByPkStub = sinon.stub(Sale, "findByPk").resolves(CreateSaleResponse); 
-    })
-
-    after(() => {
-      saleCreatedStub.restore()
-      saleProductCreatedStub.restore();
-      SaleFoundByPkStub.restore();
-    })
-
-    it('21. FALHA - não é possível criar uma nova venda sem token', async () => {
+    it('33. FALHA - não é possível fazer a atualização sem token', async () => {
       chaiHttpResponse = await chai
       .request(app)
-      .post('/sales')
-      .send(CreateSaleRequest)
+      .patch('/sales/1')
+      .send(UpdateSalesRequest);
 
       expect(chaiHttpResponse.status).to.be.equal(401);
       expect(chaiHttpResponse.body).to.deep.equal({ message : 'Token not found' });
     });
 
-    it('22. FALHA - não é possível criar uma nova venda com token inválido', async () => {
+    it('34. FALHA - não é possível fazer a atualização com token invalido', async () => {
       chaiHttpResponse = await chai
       .request(app)
-      .post('/sales')
+      .patch('/sales/1')
       .set('authorization', failedToken)
-      .send(CreateSaleRequest)
+      .send(UpdateSalesRequest);
 
       expect(chaiHttpResponse.status).to.be.equal(401);
       expect(chaiHttpResponse.body).to.deep.equal({ message : 'Expired or invalid token' });
     });
   });
 
-  describe('FALHA - token - não é possível criar uma nova venda', () => {
+  describe('FALHA - token - não é possível listar as vendas por saleID', () => {
    
     let chaiHttpResponse;
-    let saleCreatedStub;
-    let saleProductCreatedStub;
     let SaleFoundByPkStub;
+    let updateSaleStub;
 
     before(async () => {
-      saleCreatedStub = sinon.stub(Sale, "create").resolves(saleCreatedResponse);
-      saleProductCreatedStub = sinon.stub(SaleProduct, "create").resolves({ok: 'ok'});
-      SaleFoundByPkStub = sinon.stub(Sale, "findByPk").resolves(null); 
+      SaleFoundByPkStub = sinon.stub(Sale, "findByPk").resolves(null);
+      updateSaleStub = sinon.stub(Sale, "update").resolves();
     })
 
     after(() => {
-      saleCreatedStub.restore()
-      saleProductCreatedStub.restore();
       SaleFoundByPkStub.restore();
+      updateSaleStub.restore();
     })
 
-    it('23. FALHA - não é possível criar uma nova venda - erro no id', async () => {
+    it('35. FALHA - saleId não encontrado', async () => {
       chaiHttpResponse = await chai
       .request(app)
-      .post('/sales')
+      .patch('/sales/99')
       .set('authorization', sucessfullToken)
-      .send(CreateSaleRequest)
+      .send(UpdateSalesRequest);
 
       expect(chaiHttpResponse.status).to.be.equal(404);
       expect(chaiHttpResponse.body).to.deep.equal({ message : 'Could not found a sale with this id' });
     });
+
   });
 });
 

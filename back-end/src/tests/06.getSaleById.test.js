@@ -24,7 +24,7 @@ describe('ROTA: GET/sales/:id', () => {
       SaleFoundByPkStub.restore();
     })
 
-    it('26. Sucesso - É possível listar as vendas por saleID', async () => {
+    it('28. Sucesso - É possível listar as vendas por saleID', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales/1')
@@ -54,7 +54,7 @@ describe('ROTA: GET/sales/:id', () => {
    
     let chaiHttpResponse;
 
-    it('27. FALHA - não é possível fazer a requisição para as vendas sem token', async () => {
+    it('29. FALHA - não é possível fazer a requisição para as vendas sem token', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales/1');
@@ -63,7 +63,7 @@ describe('ROTA: GET/sales/:id', () => {
       expect(chaiHttpResponse.body).to.deep.equal({ message : 'Token not found' });
     });
 
-    it('28. FALHA - não é possível fazer a requisição para as vendas com token invalido', async () => {
+    it('30. FALHA - não é possível fazer a requisição para as vendas com token invalido', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales/1')
@@ -87,7 +87,7 @@ describe('ROTA: GET/sales/:id', () => {
       SaleFoundByPkStub.restore();
     })
 
-    it('29. FALHA - saleId não encontrado', async () => {
+    it('31. FALHA - saleId não encontrado', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales/99')

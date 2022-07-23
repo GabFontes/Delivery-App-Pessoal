@@ -24,7 +24,7 @@ describe('ROTA: GET/sales', () => {
       SaleFoundAllStub.restore();
     })
 
-    it('23. Sucesso - É possível consultar todas as vendas pelo usuário', async () => {
+    it('24. Sucesso - É possível consultar todas as vendas pelo usuário', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales')
@@ -60,8 +60,17 @@ describe('ROTA: GET/sales', () => {
   describe('FALHA - token - não é possível fazer a requisição para as vendas', () => {
    
     let chaiHttpResponse;
+    let SaleFoundAllStub;
 
-    it('24. FALHA - não é possível fazer a requisição para as vendas sem token', async () => {
+    before(async () => {
+      SaleFoundAllStub = sinon.stub(Sale, "findAll").throws('error'); 
+    })
+
+    after(() => {
+      SaleFoundAllStub.restore();
+    })
+
+    it('25. FALHA - não é possível fazer a requisição para as vendas sem token', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales');
@@ -70,7 +79,7 @@ describe('ROTA: GET/sales', () => {
       expect(chaiHttpResponse.body).to.deep.equal({ message : 'Token not found' });
     });
 
-    it('25. FALHA - não é possível fazer a requisição para as vendas com token invalido', async () => {
+    it('26. FALHA - não é possível fazer a requisição para as vendas com token invalido', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales')
@@ -78,6 +87,16 @@ describe('ROTA: GET/sales', () => {
 
       expect(chaiHttpResponse.status).to.be.equal(401);
       expect(chaiHttpResponse.body).to.deep.equal({ message : 'Expired or invalid token' });
+    });
+
+    it('27. FALHA - erro interno', async () => {
+      chaiHttpResponse = await chai
+      .request(app)
+      .get('/sales')
+      .set('authorization', sucessfullToken);
+
+      expect(chaiHttpResponse.status).to.be.equal(500);
+      expect(chaiHttpResponse.body).to.deep.equal({ message : 'internal error' });
     });
   });
 

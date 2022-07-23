@@ -69,3 +69,27 @@ describe('FALHA(token) - na Requisição - não é possível fazer a requisiçã
     expect(chaiHttpResponse.body).to.deep.equal({ message : 'Token not found' });
   });
 });
+
+describe('FALHA - Erro interno 500', () => {
+  let chaiHttpResponse;
+  let productStub;
+
+  before(async () => {
+    productStub = sinon.stub(Product, "findAll").throws('error')
+  })
+
+  after(() => {
+    productStub.restore();
+  })
+
+  it('19. Falha - 500 - Erro interno', async () => {
+    chaiHttpResponse = await chai
+    .request(app)
+    .get('/products')
+    .set('authorization', sucessfullToken);
+
+    expect(chaiHttpResponse.status).to.be.equal(500);
+    expect(chaiHttpResponse.body).to.deep.equal({ message : 'internal error' });
+  });
+
+});

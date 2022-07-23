@@ -85,10 +85,26 @@ const getAllSalesByUserIdResponse = [{
   status: 'Pendente',
 }];
 
+const UpdateSalesRequest = {
+  status: 'Preparando',
+};
+
+const UpdateSalesResponse = {
+  id: 14,
+  userId: 4,
+  sellerId: 2,
+  totalPrice: '20.00',
+  deliveryAddress: 'Rua dos Tolod, Nº9',
+  deliveryNumber: '000',
+  saleDate: '2022-07-21T21:27:47.000Z',
+  status: 'Preparando',
+};
 
 module.exports = {
   CreateSaleRequest,
   saleCreatedResponse,
   CreateSaleResponse,
-  getAllSalesByUserIdResponse
+  getAllSalesByUserIdResponse,
+  UpdateSalesRequest,
+  UpdateSalesResponse
 }
