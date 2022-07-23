@@ -5,7 +5,7 @@ const CreateUserController = async (req, res, next) => {
     const user = await AdminService.create(req.body);
     return res.status(201).json(user);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     next(err);
   }
 };

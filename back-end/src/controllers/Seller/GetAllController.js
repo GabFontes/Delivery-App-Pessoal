@@ -5,7 +5,7 @@ const GetAllController = async (req, res, next) => {
     const users = await SellerService.getAll();
     return res.status(200).json(users);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     next(err);
   }
 };
