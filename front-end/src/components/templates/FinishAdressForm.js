@@ -1,8 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+// import axios from 'axios';
 import InputText from '../atoms/InputText';
 import Button from '../atoms/Button';
-import SelectInput from '../atoms/SellerSelectInput';
+// import SelectInput from '../atoms/SellerSelectInput';
 import PostSale from '../../services/PostSale';
 // import GetSellers from '../../services/GetSellers';
 import Context from '../../context/Context';
@@ -12,16 +13,17 @@ export default function FinishOrderForm() {
   // ESTADOS -----------------------------------
   const {
     totalPrice,
+    sellerData,
+    // sellerId,
   } = React.useContext(Context);
   // const [cartItens, setCartItens] = useState(readProducts());
   const [deliveryAddress, setDeliveryAddress] = React.useState('');
   const [deliveryNumber, setDeliveryNumber] = React.useState('');
-  const [sellerId, setSellerId] = React.useState();
+  const [sellerId, setSellerId] = React.useState('');
 
   // CONSTANTES ---------------------------------
   const history = useHistory();
   const cartItens = readProducts();
-  const { quantity, id } = cartItens;
   const userData = () => JSON.parse(localStorage.getItem('user'));
   const { token } = userData();
   // FUNÇÕES -------------------------------------
@@ -35,20 +37,11 @@ export default function FinishOrderForm() {
     const { value } = e.target;
     setDeliveryAddress(value);
   };
-
   const handleSeller = (e) => {
     const { value } = e.target;
     setSellerId(value);
+    console.log('🚀  ~ line 54 ~ handleFormSend ~ sellerId', sellerId);
   };
-
-  // const selectSeller = async () => {
-  //   const data = await GetSellers(token);
-  //   if (!data.length) {
-  //     return console.log('erro-selectSeller');
-  //   }
-  //   console.log(data);
-  //   return data;
-  // };
 
   // Requisição post --------------
   const handleFormSend = async () => {
@@ -59,31 +52,44 @@ export default function FinishOrderForm() {
         deliveryAddress,
         deliveryNumber,
       },
-      products: [
-        {
-          productId: id,
-          quantity,
-        },
-      ],
+      products: cartItens.map(({ id, quantity }) => ({ id, quantity })),
     }, token);
-    console.log(saleDetails);
+    console.log('🚀 ~ file: ~ line 57 ~ handleFormSend ~ saleDetails', saleDetails);
+    console.log('🚀 ~ FinishAdressForm.js ~ line 57 ~ handleFormSend ~ token', token);
 
     if (!saleDetails) {
       return console.log('erro-handleFormSend');
     }
 
-    history.push(`/customer/orders/${saleDetails.id}`);
+    history.push(`/customer/orders/${saleDetails.sale.id}`);
   };
 
   // -------------------------------------------------
+
+  console.log('🚀 ~ line 63 ~ FinishOrderForm ~ sellerData', sellerData);
+  // const multipleSelect = true;
   return (
     <div>
       <form action="">
-
-        <SelectInput
-          sellerOptions="Fulana Pereira"
-          sellerValue={ handleSeller }
-        />
+        <select
+          // multiple={ multipleSelect }
+          value={ sellerData }
+          data-testid="customer_checkout__select-seller"
+          onChange={ handleSeller }
+        >
+          {
+            sellerData.map(({ name, id }, index) => (
+              <option
+                value={ id }
+                key={ index }
+                onClick={ handleSeller }
+              >
+                { name }
+              </option>
+            ))
+          }
+        </select>
+        {/* <SelectInput /> */ }
         <InputText
           testid="customer_checkout__input-address"
           type="text"
@@ -94,7 +100,7 @@ export default function FinishOrderForm() {
         />
         <InputText
           testid="customer_checkout__input-addressNumber"
-          type="number"
+          type="text"
           name="addressNumber"
           placeholder="Numero"
           value={ deliveryNumber }

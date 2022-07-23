@@ -1,11 +1,12 @@
 import React from 'react';
-import CardDetails from '../molecules/CardDetails';
+// import CardDetails from '../molecules/CardDetails';
 
 export default function OrderDetails() {
   // recebe id
   return (
     <div>
-      <CardDetails />
+      <h1>Details</h1>
+      {/* <CardDetails /> */ }
     </div>
   );
 }
