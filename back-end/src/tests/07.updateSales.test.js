@@ -4,7 +4,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const { Sale } = require('../database/models');
 const { CreateSaleResponse, UpdateSalesRequest, UpdateSalesResponse } = require('./mocks/sales.mock');
-const { sucessfullToken, failedToken } = require('./mocks/token.mock');
+const { userSucessToken, failedToken } = require('./mocks/token.mock');
 
 chai.use(chaiHttp);
 
@@ -32,7 +32,7 @@ describe('ROTA: PATCH/sales/:id', () => {
       chaiHttpResponse = await chai
       .request(app)
       .patch('/sales/1')
-      .set('authorization', sucessfullToken)
+      .set('authorization', userSucessToken)
       .send(UpdateSalesRequest)
 
       expect(chaiHttpResponse.status).to.be.equal(200);
@@ -101,7 +101,7 @@ describe('ROTA: PATCH/sales/:id', () => {
       chaiHttpResponse = await chai
       .request(app)
       .patch('/sales/99')
-      .set('authorization', sucessfullToken)
+      .set('authorization', userSucessToken)
       .send(UpdateSalesRequest);
 
       expect(chaiHttpResponse.status).to.be.equal(404);

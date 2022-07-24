@@ -6,7 +6,7 @@ const { Sale, SaleProduct } = require('../database/models');
 const {  CreateSaleRequest,
   saleCreatedResponse,
   CreateSaleResponse } = require('./mocks/sales.mock');
-const { sucessfullToken, failedToken } = require('./mocks/token.mock');
+const { userSucessToken, failedToken } = require('./mocks/token.mock');
 
 chai.use(chaiHttp);
 
@@ -36,7 +36,7 @@ describe('ROTA: POST/sales', () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/sales')
-      .set('authorization', sucessfullToken)
+      .set('authorization', userSucessToken)
       .send(CreateSaleRequest)
 
 
@@ -123,7 +123,7 @@ describe('ROTA: POST/sales', () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/sales')
-      .set('authorization', sucessfullToken)
+      .set('authorization', userSucessToken)
       .send(CreateSaleRequest)
 
       expect(chaiHttpResponse.status).to.be.equal(404);

@@ -4,8 +4,8 @@ const chai = require('chai');
 const sinon = require('sinon');
 const { User } = require('../database/models');
 const { createdUser, modelUserReturn } = require('./mocks/users.mock');
-const { adminToken, failedToken, sucessfullToken } = require('./mocks/token.mock');
-const { createAdminRequest, createAdminResponse } = require('./mocks/admin.mock');
+const { admSucessToken, failedToken, userSucessToken } = require('./mocks/token.mock');
+const { createAdminRequest } = require('./mocks/admin.mock');
 
 chai.use(chaiHttp);
 
@@ -32,7 +32,7 @@ describe('ROTA: POST/admin', () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/admin')
-      .set('authorization', adminToken)
+      .set('authorization', admSucessToken)
       .send(createAdminRequest)
 
 
@@ -56,7 +56,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     chaiHttpResponse = await chai
     .request(app)
     .post('/admin')
-    .set('authorization', adminToken)
+    .set('authorization', admSucessToken)
     .send({
       name: 'Gabriel Fontes',
       password: 'testando',
@@ -71,7 +71,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     chaiHttpResponse = await chai
     .request(app)
     .post('/admin')
-    .set('authorization', adminToken)
+    .set('authorization', admSucessToken)
     .send({
       name: 'Gabriel Fontes',
       email: 'gabfontes',
@@ -87,7 +87,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     chaiHttpResponse = await chai
     .request(app)
     .post('/admin')
-    .set('authorization', adminToken)
+    .set('authorization', admSucessToken)
     .send({
       name: 'Gabriel Fontes',
       email: 'gabfontes@email.com',
@@ -102,7 +102,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     chaiHttpResponse = await chai
     .request(app)
     .post('/admin')
-    .set('authorization', adminToken)
+    .set('authorization', admSucessToken)
     .send({
       name: 'Gabriel Fontes',
       email: 'gabfontes@email.com',
@@ -118,7 +118,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     chaiHttpResponse = await chai
     .request(app)
     .post('/admin')
-    .set('authorization', adminToken)
+    .set('authorization', admSucessToken)
     .send({
       email: 'gabfontes@email.com',
       password: 'testando',
@@ -133,7 +133,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     chaiHttpResponse = await chai
     .request(app)
     .post('/admin')
-    .set('authorization', adminToken)
+    .set('authorization', admSucessToken)
     .send({
       name: 'Gab',
       email: 'gabfontes@email.com',
@@ -149,7 +149,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     chaiHttpResponse = await chai
     .request(app)
     .post('/admin')
-    .set('authorization', adminToken)
+    .set('authorization', admSucessToken)
     .send({
       name: 'Gabriel Fontes',
       email: 'gabfontes@email.com',
@@ -195,7 +195,7 @@ describe('FALHAS - na Requisição - não é possível criar um novo usuário', 
     chaiHttpResponse = await chai
     .request(app)
     .post('/admin')
-    .set('authorization', sucessfullToken)
+    .set('authorization', userSucessToken)
     .send({
       name: 'Gabriel Fontes',
       email: 'gabfontes@email.com',
@@ -226,7 +226,7 @@ describe('ROTA: POST/admin', () => {
       chaiHttpResponse = await chai
       .request(app)
       .post('/admin')
-      .set('authorization', adminToken)
+      .set('authorization', admSucessToken)
       .send(createAdminRequest)
 
 

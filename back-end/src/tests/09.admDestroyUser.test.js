@@ -3,9 +3,9 @@ const chaiHttp = require('chai-http');
 const chai = require('chai');
 const sinon = require('sinon');
 const { User } = require('../database/models');
-const { createdUser, modelUserReturn } = require('./mocks/users.mock');
-const { adminToken, failedToken, sucessfullToken } = require('./mocks/token.mock');
-const { createAdminRequest, createAdminResponse } = require('./mocks/admin.mock');
+const { createdUser } = require('./mocks/users.mock');
+const { admSucessToken, failedToken, userSucessToken } = require('./mocks/token.mock');
+
 
 chai.use(chaiHttp);
 
@@ -32,7 +32,7 @@ describe('ROTA: DELETE/admin/:id', () => {
       chaiHttpResponse = await chai
       .request(app)
       .delete('/admin/1')
-      .set('authorization', adminToken);
+      .set('authorization', admSucessToken);
 
       expect(chaiHttpResponse.status).to.be.equal(201);
 
@@ -67,7 +67,7 @@ describe('FALHAS - na Requisição - não é possível deletar o usuário', () =
     chaiHttpResponse = await chai
     .request(app)
     .delete('/admin/1')
-    .set('authorization', sucessfullToken);
+    .set('authorization', userSucessToken);
 
     expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body).to.deep.equal({ message : "You do not have permission to access this page" });
@@ -92,7 +92,7 @@ describe('ROTA: POST/admin', () => {
       chaiHttpResponse = await chai
       .request(app)
       .delete('/admin/1')
-      .set('authorization', adminToken);
+      .set('authorization', admSucessToken);
 
 
       expect(chaiHttpResponse.status).to.be.equal(404);

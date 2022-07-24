@@ -4,7 +4,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const { Sale } = require('../database/models');
 const { CreateSaleResponse } = require('./mocks/sales.mock');
-const { sucessfullToken, failedToken } = require('./mocks/token.mock');
+const { userSucessToken, failedToken } = require('./mocks/token.mock');
 
 chai.use(chaiHttp);
 
@@ -28,7 +28,7 @@ describe('ROTA: GET/sales/:id', () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales/1')
-      .set('authorization', sucessfullToken)
+      .set('authorization', userSucessToken)
 
       expect(chaiHttpResponse.status).to.be.equal(200);
       expect(chaiHttpResponse.body).to.have.property('id');
@@ -91,7 +91,7 @@ describe('ROTA: GET/sales/:id', () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/sales/99')
-      .set('authorization', sucessfullToken);
+      .set('authorization', userSucessToken);
 
       expect(chaiHttpResponse.status).to.be.equal(404);
       expect(chaiHttpResponse.body).to.deep.equal({ message : 'Could not found a sale with this id' });

@@ -4,7 +4,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const { User } = require('../database/models');
 const sellerGetAllResponse = require('./mocks/seller.mock');
-const { sucessfullToken, failedToken } = require('./mocks/token.mock');
+const { userSucessToken, failedToken } = require('./mocks/token.mock');
 
 chai.use(chaiHttp);
 
@@ -28,7 +28,7 @@ describe('ROTA: get/seller', () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/seller')
-      .set('authorization', sucessfullToken)
+      .set('authorization', userSucessToken)
 
 
       expect(chaiHttpResponse.status).to.be.equal(200);
@@ -77,7 +77,7 @@ describe('FALHA - Erro interno 500', () => {
     chaiHttpResponse = await chai
     .request(app)
     .get('/seller')
-    .set('authorization', sucessfullToken);
+    .set('authorization', userSucessToken);
 
     expect(chaiHttpResponse.status).to.be.equal(500);
     expect(chaiHttpResponse.body).to.deep.equal({ message : 'internal error' });
