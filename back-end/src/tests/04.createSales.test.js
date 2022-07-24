@@ -40,7 +40,7 @@ describe('ROTA: POST/sales', () => {
       .send(CreateSaleRequest)
 
 
-      expect(chaiHttpResponse.status).to.be.equal(200);
+      expect(chaiHttpResponse.status).to.be.equal(201);
       expect(chaiHttpResponse.body).to.have.property('id');
       expect(chaiHttpResponse.body).to.have.property('userId');
       expect(chaiHttpResponse.body).to.have.property('sellerId');

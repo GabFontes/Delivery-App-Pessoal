@@ -24,7 +24,7 @@ describe('ROTA: get/seller', () => {
       sellerStub.restore()
     })
 
-    it('16. Sucesso - É possível fazer a requisição', async () => {
+    it('58. Sucesso - É possível fazer a requisição', async () => {
       chaiHttpResponse = await chai
       .request(app)
       .get('/seller')
@@ -41,7 +41,7 @@ describe('ROTA: get/seller', () => {
 describe('FALHA(token) - na Requisição - não é possível fazer a requisição', () => {
   let chaiHttpResponse;
 
-  it('17. Falha - Token não válido', async () => {
+  it('59. Falha - Token não válido', async () => {
     chaiHttpResponse = await chai
     .request(app)
     .get('/seller')
@@ -51,7 +51,7 @@ describe('FALHA(token) - na Requisição - não é possível fazer a requisiçã
     expect(chaiHttpResponse.body).to.deep.equal({ message : 'Expired or invalid token' });
   });
 
-  it('18. Falha - Requisição sem token', async () => {
+  it('60. Falha - Requisição sem token', async () => {
     chaiHttpResponse = await chai
     .request(app)
     .get('/seller');
@@ -73,7 +73,7 @@ describe('FALHA - Erro interno 500', () => {
     sellerStub.restore()
   })
 
-  it('19. Falha - 500 - Erro interno', async () => {
+  it('61. Falha - 500 - Erro interno', async () => {
     chaiHttpResponse = await chai
     .request(app)
     .get('/seller')
