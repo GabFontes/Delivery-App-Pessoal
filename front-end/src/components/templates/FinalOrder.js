@@ -22,6 +22,26 @@ export default function FinalOrder() {
 
   return (
     <div>
+      <div style={ { display: 'flex' } }>
+        <p>
+          Item
+        </p>
+        <p>
+          Descrição
+        </p>
+        <p>
+          Quantidade
+        </p>
+        <p>
+          Valor Unitário
+        </p>
+        <p>
+          Sub-total
+        </p>
+        <p>
+          Remover Item
+        </p>
+      </div>
       <div>
         { cartItens && cartItens.map(({
           name,
@@ -29,24 +49,26 @@ export default function FinalOrder() {
           unityPrice,
           subTotal,
           id,
-        }, i) => (
+        }, index) => (
           <ProductCart
-            key={ i }
-            indice={ i }
+            key={ index }
+            i={ index }
             id={ id }
             productName={ name }
-            quantity={ quantity }
-            price={ unityPrice }
-            subtotal={ subTotal }
+            quantity={ +quantity }
+            price={ +unityPrice }
+            subtotal={ +subTotal }
             set={ setCartItens }
             click={ handleClick }
           />
         ))}
       </div>
       <div data-testid="customer_checkout__element-order-total-price">
-        Total: R$
-        {' '}
-        { finalPrice.toFixed(2).toString().replace('.', ',') }
+        <h2>
+          Total: R$
+          {' '}
+          { finalPrice.toFixed(2).toString().replace('.', ',') }
+        </h2>
       </div>
     </div>
   );

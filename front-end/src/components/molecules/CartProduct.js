@@ -7,53 +7,32 @@ export default function ProductCart({
   quantity,
   price,
   subtotal,
-  indice,
+  i,
   click,
   id,
 }) {
   return (
     <div>
       <div style={ { display: 'flex' } }>
-        <p>
-          Item
-        </p>
-        <p>
-          Descrição
-        </p>
-        <p>
-          Quantidade
-        </p>
-        <p>
-          Valor Unitário
-        </p>
-        <p>
-          Sub-total
-        </p>
-        <p>
-          Remover Item
-        </p>
-      </div>
-
-      <div style={ { display: 'flex' } }>
-        <h4>
-          { indice }
+        <h4 data-testid={ `customer_checkout__element-order-table-item-number-${i}` }>
+          { i + 1 }
         </h4>
-        <h4 data-testid={ `customer_checkout__element-order-table-name-${indice}` }>
+        <h4 data-testid={ `customer_checkout__element-order-table-name-${i}` }>
           { productName }
         </h4>
-        <h4 data-testid={ `customer_checkout__element-order-table-quantity-${indice}` }>
+        <h4 data-testid={ `customer_checkout__element-order-table-quantity-${i}` }>
           { quantity }
         </h4>
-        <h4 data-testid={ `customer_checkout__element-order-table-unit-price-${indice}` }>
-          { price }
+        <h4 data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }>
+          { price.toFixed(2).toString().replace('.', ',') }
         </h4>
-        <h4 data-testid={ `customer_checkout__element-order-table-sub-total-${indice}` }>
-          { subtotal }
+        <h4 data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }>
+          { subtotal.toFixed(2).toString().replace('.', ',') }
         </h4>
         <Button
           nameView="Remover"
           disabled={ false }
-          testid={ `customer_checkout__element-order-table-remove-${indice}` }
+          testid={ `customer_checkout__element-order-table-remove-${i}` }
           onClick={ () => click(id) }
           name="removeButton"
         />
@@ -67,7 +46,7 @@ ProductCart.propTypes = {
   subtotal: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
   productName: PropTypes.string.isRequired,
-  indice: PropTypes.number.isRequired,
+  i: PropTypes.number.isRequired,
   click: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
 };
