@@ -1,33 +1,26 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-// import axios from 'axios';
-import InputText from '../atoms/InputText';
-import Button from '../atoms/Button';
-// import SelectInput from '../atoms/SellerSelectInput';
-import PostSale from '../../services/PostSale';
-// import GetSellers from '../../services/GetSellers';
-import Context from '../../context/Context';
-import { readProducts } from '../../services/AddProducts';
 
 export default function FinishOrderForm() {
   // ESTADOS -----------------------------------
   const {
-    totalPrice,
-    sellerData,
+    userData,
+    // totalPrice,
+    // sellerData,
     // sellerId,
   } = React.useContext(Context);
   // const [cartItens, setCartItens] = useState(readProducts());
   const [deliveryAddress, setDeliveryAddress] = React.useState('');
   const [deliveryNumber, setDeliveryNumber] = React.useState('');
-  const [sellerId, setSellerId] = React.useState('');
+  // const [sellerId, setSellerId] = React.useState('');
 
   // CONSTANTES ---------------------------------
-  const history = useHistory();
-  const cartItens = readProducts();
-  const userData = () => JSON.parse(localStorage.getItem('user'));
-  const { token } = userData();
-  // FUNÇÕES -------------------------------------
+  // const history = useHistory();
+  // const cartItens = readProducts();
+  const { token } = userData;
+  console.log('🚀 ~ file: FinishAdressForm.js ~ line 29 ~ userData', userData);
+  console.log('🚀 ~ file: FinishAdressForm.js ~ line 30 ~ token', token);
 
+  // FUNÇÕES -------------------------------------
   const handleAddressNumber = (e) => {
     const { value } = e.target;
     setDeliveryNumber(value);
@@ -37,59 +30,58 @@ export default function FinishOrderForm() {
     const { value } = e.target;
     setDeliveryAddress(value);
   };
-  const handleSeller = (e) => {
-    const { value } = e.target;
-    setSellerId(value);
-    console.log('🚀  ~ line 54 ~ handleFormSend ~ sellerId', sellerId);
-  };
+
+  // const handleSeller = (e) => {
+  //   const { value } = e.target;
+  //   setSellerId(value);
+  // };
 
   // Requisição post --------------
-  const handleFormSend = async () => {
-    const saleDetails = await PostSale({
-      sale: {
-        sellerId,
-        totalPrice,
-        deliveryAddress,
-        deliveryNumber,
-      },
-      products: cartItens.map(({ id, quantity }) => ({ id, quantity })),
-    }, token);
-    console.log('🚀 ~ file: ~ line 57 ~ handleFormSend ~ saleDetails', saleDetails);
-    console.log('🚀 ~ FinishAdressForm.js ~ line 57 ~ handleFormSend ~ token', token);
+  const handleFormSend = async (e) => {
+    // const saleDetails = await PostSale({
+    //   sale: {
+    //     sellerId: 2,
+    //     totalPrice,
+    //     deliveryAddress,
+    //     deliveryNumber,
+    //   },
+    //   products: cartItens.map(({ id, quantity }) => ({ productId: id, quantity })),
+    // }, token);
 
-    if (!saleDetails) {
-      return console.log('erro-handleFormSend');
-    }
+    // console.log('🚀 file: FinishAdressForm.js ~ handle ~ line 60 ~ token', token);
+    // console.log('🚀 file: FinishAdressForm.js ~ handle ~ line 61 ~ etails', saleDetails);
 
-    history.push(`/customer/orders/${saleDetails.sale.id}`);
+    // history.push(`/customer/orders/${saleDetails.id}`);
   };
 
   // -------------------------------------------------
 
-  console.log('🚀 ~ line 63 ~ FinishOrderForm ~ sellerData', sellerData);
-  // const multipleSelect = true;
   return (
     <div>
-      <form action="">
-        <select
-          // multiple={ multipleSelect }
-          value={ sellerData }
+      <form onSubmit={ handleFormSend }>
+        {/* <select
           data-testid="customer_checkout__select-seller"
           onChange={ handleSeller }
         >
           {
-            sellerData.map(({ name, id }, index) => (
+            sellerData.map(({ id, name }, index) => (
               <option
                 value={ id }
                 key={ index }
-                onClick={ handleSeller }
               >
                 { name }
               </option>
             ))
           }
-        </select>
-        {/* <SelectInput /> */ }
+        </select> */}
+
+        {/* <select>
+          <option value="grapefruit">Grapefruit</option>
+          <option value="lime">Lime</option>
+          <option value="coconut">Coconut</option>
+          <option value="mango">Mango</option>
+        </select> */}
+
         <InputText
           testid="customer_checkout__input-address"
           type="text"
@@ -106,12 +98,19 @@ export default function FinishOrderForm() {
           value={ deliveryNumber }
           onChange={ handleAddressNumber }
         />
-        <Button
+        {/* <Button
           nameView="Finalizar pedido"
           testid="customer_checkout__button-submit-order"
           onClick={ handleFormSend }
           name="BtnRegister"
-        />
+        /> */}
+
+        <button
+          type="submit"
+          testid="customer_checkout__button-submit-order"
+        >
+          Finalizar pedido
+        </button>
       </form>
     </div>
   );

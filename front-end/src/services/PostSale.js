@@ -2,28 +2,25 @@ import axios from 'axios';
 
 async function PostSale(sale, token) {
   console.log('🚀 ~ file: PostSale.js ~ line 4 ~ PostSale ~ sale', sale);
+  console.log('🚀 ~ file: PostSale.js ~ line 5 ~ PostSale ~ token', token);
 
   try {
-    const config = {
-      body: { ...sale },
-      headers: { authorization: token },
-    };
     const url = 'http://localhost:3001/sales';
-    const resp = await axios.post(url, config);
-    console.log('🚀 ~ file: PostSale.js ~ line 11 ~ PostSale ~ sale', sale);
+    const resp = await axios.post(url, sale, { headers: { authorization: token } });
     const { data } = resp;
-    console.log(data);
-    const dataWithConvertedDate = {
-      ...data,
-      saleDate: new Date(saleDate).toLocaleDateString('pt-BR'),
-    };
-    return dataWithConvertedDate;
+    console.log('🚀 ~ file: PostSale.js ~ line 15 ~ PostSale ~ data', data);
+    return data;
   } catch (err) {
     return err;
   }
 }
 
 export default PostSale;
+
+// const dataWithConvertedDate = {
+//   ...data,
+//   saleDate: new Date(saleDate).toLocaleDateString('pt-BR'),
+// };
 
 // const CreateSaleRequest = {
 //   sale: {

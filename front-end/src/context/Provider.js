@@ -18,7 +18,8 @@ export default function Provider({ children }) {
   const [totalPrice, setTotalPrice] = useUpdatePriceApi(prodCart);
 
   // Seller ------------------------------------------------------------------
-  const [sellerData, setSellerData] = useSellerApi(login, userData);
+  const [cart, setCart] = useState(false);
+  const [sellerData, setSellerData] = useSellerApi(cart, userData);
 
   const contexMemo = useMemo(() => ({
     sellerData,
@@ -29,11 +30,15 @@ export default function Provider({ children }) {
     prodCart,
     setlogin,
     login,
+    cart,
+    setCart,
     userData,
     setUserData,
     setProductsData,
     productsData,
-  }), [login,
+  }), [
+    cart,
+    login,
     prodCart,
     productsData,
     sellerData, setProductsData, setSellerData, setTotalPrice, totalPrice, userData]);

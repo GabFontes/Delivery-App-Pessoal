@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import GetSellers from '../services/GetSellers';
 
-export default function useSellerApi(isLogged, userData) {
+export default function useSellerApi(isCart, userData) {
   const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
@@ -14,9 +14,9 @@ export default function useSellerApi(isLogged, userData) {
         console.log(e);
       }
     };
-    if (isLogged) {
+    if (isCart) {
       saveSellerApi(userData);
     }
-  }, [userData, isLogged]);
+  }, [userData, isCart]);
   return [sellers];
 }

@@ -10,6 +10,7 @@ export default function Customer() {
   const {
     // userData,
     // login,
+    setCart,
     totalPrice,
     productsData,
   } = useContext(Context);
@@ -17,6 +18,7 @@ export default function Customer() {
   const history = useHistory();
 
   const handleBtnCar = async () => {
+    setCart(true);
     history.push('/customer/checkout');
   };
 
