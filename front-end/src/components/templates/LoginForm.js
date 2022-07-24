@@ -8,17 +8,15 @@ import PostLogin from '../../services/PostLogin';
 export default function LoginForm() {
   // ESTADOS -----------------------------------
   const {
-    userMail,
-    setUserMail,
-    userPassword,
-    setUserPassword,
-    // loginData,
-    // setLoginData,
+    setlogin,
+    setUserData,
   } = useContext(Context);
 
   // CONSTANTES ---------------------------------
   const minCaracs = 6;
   const history = useHistory();
+  const [userEmail, setuserEmail] = useState('');
+  const [userPassword, setuserPassword] = useState('');
   const [btnLogin, setBtnLogin] = useState(true);
   const [errorMsg, setErrorMsg] = useState(false);
 
@@ -28,51 +26,46 @@ export default function LoginForm() {
     return mailRegex.test(email);
   };
 
-  const btnChange = () => {
-    if (mailValidator(userMail) && userPassword.length >= minCaracs) {
-      return setBtnLogin(false);
-    }
-    return setBtnLogin(true);
-  };
-
-  useEffect(() => {
-    btnChange();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userMail, userPassword]);
-
   // todas as vezes que a pagina é carregada o setErrorMsg se altera para false
   useEffect(() => {
     setErrorMsg(false);
   }, []);
 
   const handleEmail = (e) => {
-    setUserMail(e.target.value);
+    const { value } = e.target;
+    setuserEmail(value);
+    if (mailValidator(value) && userPassword.length >= minCaracs) {
+      return setBtnLogin(false);
+    }
+    return setBtnLogin(true);
   };
 
   const handlePassword = (e) => {
-    setUserPassword(e.target.value);
+    const { value } = e.target;
+    setuserPassword(value);
+    if (mailValidator(userEmail) && value.length >= minCaracs) {
+      return setBtnLogin(false);
+    }
+    return setBtnLogin(true);
   };
 
   const handleLogin = async () => {
     // Requisição post --------------
-    const data = await PostLogin({ email: userMail, password: userPassword });
+    const data = await PostLogin({ email: userEmail, password: userPassword });
 
-    if (!data.user) {
-      setUserMail('');
-      setUserPassword('');
-      return setErrorMsg(true);
-    }
+    if (!data.user) return setErrorMsg(true);
 
-    // setLoginData(data);
+    setUserData(data);
+    setlogin(true);
 
     // console.log('role:', data.user.role);
 
     // Redirecionamento de rota -------------
-    // if (data.user.role === 'seller') return history.push('/seller/orders');
+    if (data.user.role === 'seller') return history.push('/seller/orders');
 
-    // if (data.user.role === 'administrator') return history.push('/admin/manage');
+    if (data.user.role === 'administrator') return history.push('/admin/manage');
 
-    // if (data.user.role === 'customer') return history.push('/customer/products');
+    if (data.user.role === 'customer') return history.push('/customer/products');
   };
 
   const handleRegister = async () => {
@@ -88,7 +81,7 @@ export default function LoginForm() {
           type="email"
           name="userMail"
           placeholder="Email"
-          value={ userMail }
+          value={ userEmail }
           onChange={ handleEmail }
         />
         <InputText
@@ -107,7 +100,7 @@ export default function LoginForm() {
           name="BtnLogin"
         />
         <Button
-          nameView="Cadastrar"
+          nameView="Botão de cadastro"
           testid="common_login__button-register"
           onClick={ handleRegister }
           name="BtnRegister"
