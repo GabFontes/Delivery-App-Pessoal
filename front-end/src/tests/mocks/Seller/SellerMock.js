@@ -3,7 +3,7 @@
 // precisa de token
 // === /seller ===
 
-const sellerGetAllResponse = [
+export default sellerGetAllResponse = [
   {
     id: 2,
     name: 'Fulana Pereira',
@@ -20,4 +20,4 @@ const sellerGetAllResponse = [
   },
 ];
 
-module.exports = sellerGetAllResponse;
+// module.exports = sellerGetAllResponse;
