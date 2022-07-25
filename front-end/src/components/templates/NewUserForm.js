@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PostRegister from '../../services/PostRegister';
+import PostAdminRegister from '../../services/PostAdminRegister';
 import Button from '../atoms/Button';
 import InputDropDown from '../atoms/InputDropDown';
 import InputText from '../atoms/InputText';
@@ -13,7 +13,7 @@ export default function NewUserForm() {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userRole, setUserRole] = useState('user');
+  const [userRole, setUserRole] = useState('customer');
   const [btnRegister, setBtnRegister] = useState(true);
 
   // FUNÇÕES ----------------------------------
@@ -54,9 +54,10 @@ export default function NewUserForm() {
   };
 
   const handleRegister = async () => {
-    const data = await PostRegister({
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const data = await PostAdminRegister({
       name: userName, email: userEmail, password: userPassword, role: userRole,
-    });
+    }, token);
 
     if (!data.user) {
       return setErrorMsg(true);
@@ -97,12 +98,13 @@ export default function NewUserForm() {
           //   {admin: 'Administrador' },
           //   { seller: 'Vendedor' },
           //   { user: 'Usuário' }] }
-          options={ ['user', 'admin', 'seller'] }
+          options={ ['customer', 'administrator', 'seller'] }
           onChange={ handleRole }
         />
         <Button
           nameView="Cadastrar"
           testid="admin_manage__button-register"
+          type="submit"
           onClick={ handleRegister }
           disabled={ btnRegister }
           name="btnRegister"

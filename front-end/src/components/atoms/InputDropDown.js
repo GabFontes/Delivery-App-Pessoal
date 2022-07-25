@@ -23,7 +23,8 @@ export default function InputDropDown({
 
 InputDropDown.propTypes = {
   name: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  // options: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
   testid: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
