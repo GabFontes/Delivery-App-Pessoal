@@ -13,7 +13,7 @@ import { CreateSaleResponse } from './Sales/SalesMock';
 // POST http://localhost:3001/sales
 
 export const getMockAxios = (url) => {
-  console.log(url);
+  // console.log(url);
   if (url === 'http://localhost:3001/products') {
     return Promise.resolve({
       data: productsResponse,
@@ -31,6 +31,13 @@ export const postMockAxios = (url) => {
   if (url === 'http://localhost:3001/login') {
     return Promise.resolve({ data: longinResponse });
   }
+
+  if (url === 'notfound') {
+    return Promise.resolve({
+      data: [],
+    });
+  }
+
   if (url === 'http://localhost:3001/register') {
     return Promise.resolve({ data: registerResponse });
   }
