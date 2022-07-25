@@ -2,7 +2,7 @@ const { User } = require('../../database/models');
 const err = require('../../utils/error.base');
 
 const DestroyUserService = async (id) => {
-  console.log(id);
+  // console.log(id);
   const userExists = await User.findOne({ where: { id } });
 
   if (!userExists) {

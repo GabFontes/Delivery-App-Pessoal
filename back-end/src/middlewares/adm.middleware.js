@@ -36,7 +36,7 @@ module.exports = (req, res, next) => {
     isRoleValid(role);
     next();
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     next(e);
   }
 };

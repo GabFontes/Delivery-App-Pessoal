@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 async function GetSellers(token) {
-  console.log('🚀 ~ file: GetSellers.js ~ line 4 ~ GetSellers ~ token', token);
+  // console.log('🚀 ~ file: GetSellers.js ~ line 4 ~ GetSellers ~ token', token);
   try {
     const url = 'http://localhost:3001/seller';
     const resp = await axios.get(url, { headers: { authorization: token } });

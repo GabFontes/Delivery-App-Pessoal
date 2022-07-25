@@ -7,7 +7,7 @@ const UpdateSalesController = async (req, res, next) => {
     const sale = await SalesService.update(id, status);
     return res.status(200).json(sale);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     next(err);
   }
 };
