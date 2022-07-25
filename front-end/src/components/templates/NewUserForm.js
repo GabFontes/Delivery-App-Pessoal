@@ -13,7 +13,7 @@ export default function NewUserForm() {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userRole, setUserRole] = useState(user);
+  const [userRole, setUserRole] = useState('user');
   const [btnRegister, setBtnRegister] = useState(true);
 
   // FUNÇÕES ----------------------------------
