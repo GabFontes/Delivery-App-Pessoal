@@ -1,7 +1,7 @@
 // cria um usuário e gera um token
 // POST
 // === /register ===
-export default registerResponse = {
+const registerResponse = {
   user: {
     id: 4,
     name: 'Thauler Mayrink',
@@ -19,6 +19,7 @@ export default registerResponse = {
 //   password: 'testando',
 // };
 
+export default registerResponse;
 // module.exports = {
 //   registerRequest,
 //   registerResponse,

@@ -13,12 +13,15 @@ import { CreateSaleResponse } from './Sales/SalesMock';
 // POST http://localhost:3001/sales
 
 export const getMockAxios = (url) => {
+  console.log(url);
   if (url === 'http://localhost:3001/products') {
-    return Promise.resolve(productsResponse);
+    return Promise.resolve({
+      data: productsResponse,
+    });
   }
 
   if (url === 'http://localhost:3001/seller') {
-    return Promise.resolve(sellerGetAllResponse);
+    return Promise.resolve({ data: sellerGetAllResponse });
   }
 
   return Promise.reject(new Error('endpoint error'));
@@ -26,13 +29,13 @@ export const getMockAxios = (url) => {
 
 export const postMockAxios = (url) => {
   if (url === 'http://localhost:3001/login') {
-    return Promise.resolve(longinResponse);
+    return Promise.resolve({ data: longinResponse });
   }
   if (url === 'http://localhost:3001/register') {
-    return Promise.resolve(registerResponse);
+    return Promise.resolve({ data: registerResponse });
   }
   if (url === 'http://localhost:3001/sales') {
-    return Promise.resolve(CreateSaleResponse);
+    return Promise.resolve({ data: CreateSaleResponse });
   }
   return Promise.reject(new Error('endpoint error'));
 };
