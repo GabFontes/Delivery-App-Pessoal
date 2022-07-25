@@ -18,7 +18,7 @@ export default function Header() {
 
   // CONSTANTES -----------------------------------------
   const history = useHistory();
-  const { user: { name, id } } = userData;
+  const { user: { name } } = userData;
 
   // FUNÇÕES --------------------------------------------
   const handleProducts = async () => {
@@ -26,7 +26,7 @@ export default function Header() {
   };
 
   const handleOrders = async () => {
-    history.push(`/customer/order/${id}`);
+    history.push('/customer/orders');
   };
 
   const handleLogOut = async () => {
