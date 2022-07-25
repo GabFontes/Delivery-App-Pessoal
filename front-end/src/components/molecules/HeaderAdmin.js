@@ -12,22 +12,22 @@ export default function HeaderAdmin() {
 
   // DATA-TESTIDS ----------------------------------
   // const testidProducts = 'customer_products__element-navbar-link-products';
-  const testidOrders = 'customer_products__element-navbar-link-orders';
+  // const testidOrders = 'customer_products__element-navbar-link-orders';
   const testidUserName = 'customer_products__element-navbar-user-full-name';
   const testidLogOut = 'customer_products__element-navbar-link-logout';
 
   // CONSTANTES -----------------------------------------
   const history = useHistory();
-  const { user: { name, id } } = userData;
+  const { user: { name } } = userData;
 
   // FUNÇÕES --------------------------------------------
   // const handleProducts = async () => {
   //   history.push('/customer/products');
   // };
 
-  const handleOrders = async () => {
-    history.push(`/customer/order/${id}`);
-  };
+  // const handleOrders = async () => {
+  //   history.push(`/customer/order/${id}`);
+  // };
 
   const handleLogOut = async () => {
     deleteKeyLocal('user');
@@ -42,12 +42,12 @@ export default function HeaderAdmin() {
         onClick={ handleProducts }
         name="produtos"
       /> */}
-      <Button
+      {/* <Button
         nameView="MEUS PEDIDOS"
         testid={ testidOrders }
         onClick={ handleOrders }
         name="meus-pedidos"
-      />
+      /> */}
       <div data-testid={ testidUserName }>
         { name }
       </div>
