@@ -1,7 +1,7 @@
 // faz o login do usuário
 // POST
 // === /login ===
-const longinResponse = {
+export const longinResponse = {
   user: {
     id: 4,
     name: 'Thauler Mayrink',
@@ -14,12 +14,10 @@ const longinResponse = {
   .MBUexrn850cQlGKabHTeSZD0gf7GVbQoo0oYQ7Mf5bI`,
 };
 
-// const loginRequest = {
-//   email: 'thauler98@email.com',
-//   password: 'testando',
-// };
-
-export default longinResponse;
+export const loginRequest = {
+  email: 'thauler98@email.com',
+  password: 'testando',
+};
 
 // module.exports = {
 //   loginRequest,

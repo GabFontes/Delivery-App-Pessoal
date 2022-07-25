@@ -1,7 +1,7 @@
 // import { createAdminResponse, getAllResponse} from './Admin/AdminMock';
 import productsResponse from './Products/ProductsMock';
 import sellerGetAllResponse from './Seller/SellerMock';
-import longinResponse from './Login/LoginMock';
+import { longinResponse } from './Login/LoginMock';
 import registerResponse from './Register/UserMock';
 import { CreateSaleResponse } from './Sales/SalesMock';
 
@@ -36,6 +36,10 @@ export const postMockAxios = (url) => {
   }
   if (url === 'http://localhost:3001/sales') {
     return Promise.resolve({ data: CreateSaleResponse });
+  }
+  if (url === 'err') {
+    // console.log(url);
+    return Promise.reject(new Error('error for test'));
   }
   return Promise.reject(new Error('endpoint error'));
 };

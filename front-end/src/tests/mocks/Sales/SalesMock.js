@@ -77,22 +77,22 @@ export const getSaleByIdResponse = {
 // POST
 // === /sales ===
 
-// const CreateSaleRequest = {
-//   sale: {
-//     sellerId: 2,
-//     totalPrice: '20.00',
-//     deliveryAddress: 'Rua dos Tolod, Nº909',
-//     deliveryNumber: '000',
-//   },
-//   products: [{
-//     productId: 9,
-//     quantity: 20,
-//   },
-//   {
-//     productId: 11,
-//     quantity: 30,
-//   }],
-// };
+export const CreateSaleRequest = {
+  sale: {
+    sellerId: 2,
+    totalPrice: '20.00',
+    deliveryAddress: 'Rua dos Tolod, Nº909',
+    deliveryNumber: '000',
+  },
+  products: [{
+    productId: 9,
+    quantity: 20,
+  },
+  {
+    productId: 11,
+    quantity: 30,
+  }],
+};
 
 export const CreateSaleResponse = {
   id: 14,
