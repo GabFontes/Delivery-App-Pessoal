@@ -20,4 +20,6 @@ const sellerGetAllResponse = [
   },
 ];
 
+export default sellerGetAllResponse;
+
 module.exports = sellerGetAllResponse;

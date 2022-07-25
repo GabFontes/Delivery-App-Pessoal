@@ -3,7 +3,7 @@
 // precisa de token
 // === /admin ===
 
-const getAllResponse = [
+export const getAllResponse = [
   {
     id: 2,
     name: 'Fulana Pereira',
@@ -25,14 +25,14 @@ const getAllResponse = [
 // precisa de token
 // === /admin ===
 
-const createAdminRequest = {
-  name: 'Gabriel Fontes',
-  email: 'gabfontes@email.com',
-  password: 'testando',
-  role: 'seller',
-};
+// const createAdminRequest = {
+//   name: 'Gabriel Fontes',
+//   email: 'gabfontes@email.com',
+//   password: 'testando',
+//   role: 'seller',
+// };
 
-const createAdminResponse = {
+export const createAdminResponse = {
   user: {
     id: 5,
     name: 'Gabriel Fontes',
@@ -50,8 +50,8 @@ const createAdminResponse = {
 // === /admin/*id* ===
 // retorna 1 caso deletado com sucesso ou uma mensagem de erro 'User not found', 404
 
-module.exports = {
-  createAdminRequest,
-  createAdminResponse,
-  getAllResponse,
-};
+// module.exports = {
+//   createAdminRequest,
+//   createAdminResponse,
+//   getAllResponse,
+// };
