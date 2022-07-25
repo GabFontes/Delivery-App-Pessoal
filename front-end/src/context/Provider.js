@@ -4,6 +4,8 @@ import Context from './Context';
 import useProductsApi from '../hooks/productHook';
 import useUpdatePriceApi from '../hooks/totalPriceHook';
 import useSellerApi from '../hooks/sellerHook';
+import useOrdersApi from '../hooks/ordersHook';
+import useOrdersByIdApi from '../hooks/ordersByIdHook';
 
 export default function Provider({ children }) {
   // USER --------------------------------------------------------------------
@@ -21,7 +23,21 @@ export default function Provider({ children }) {
   const [cart, setCart] = useState(false);
   const [sellerData, setSellerData] = useSellerApi(cart, userData);
 
+  // ORDERS ------------------------------------------------------------------
+  const [orders, setOrders] = useState(false);
+  const [ordersData, setordersData] = useOrdersApi(orders, userData);
+
+  const [orderById, setOrderById] = React.useState(false);
+  const [pId, setPId] = React.useState(0);
+  const [ordersByIdData, setOrdersByIdData] = useOrdersByIdApi(pId, orderById, userData);
+
   const contexMemo = useMemo(() => ({
+    pId,
+    setPId,
+    orderById,
+    setOrderById,
+    ordersByIdData,
+    setOrdersByIdData,
     sellerData,
     setSellerData,
     totalPrice,
@@ -36,10 +52,21 @@ export default function Provider({ children }) {
     setUserData,
     setProductsData,
     productsData,
+    orders,
+    setOrders,
+    ordersData,
+    setordersData,
   }), [
+    ordersByIdData,
+    setOrdersByIdData,
+    pId,
+    orderById,
     cart,
     login,
     prodCart,
+    ordersData,
+    setordersData,
+    orders,
     productsData,
     sellerData, setProductsData, setSellerData, setTotalPrice, totalPrice, userData]);
 
