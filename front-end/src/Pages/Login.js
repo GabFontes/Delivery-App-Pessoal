@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import LoginForm from '../components/templates/LoginForm';
 import Context from '../context/Context';
@@ -8,21 +8,22 @@ export default function Login() {
   const location = useLocation();
 
   const {
-    setlogin,
-    setUserData,
+    login,
+    // userData,
   } = useContext(Context);
 
   const redirect = () => {
     const currentPathName = location.pathname.includes('/login');
+    if (login) {
+      history.push('/customer/products');
+    }
     return !currentPathName && history.push('/login');
   };
 
-  useLayoutEffect(() => {
-    setlogin(false);
-    setUserData('');
-  }, [setlogin, setUserData]);
-
   redirect();
+
+  const readUser = JSON.parse(localStorage.getItem('user'));
+  console.log('user ->', readUser);
 
   return (
     <div>
