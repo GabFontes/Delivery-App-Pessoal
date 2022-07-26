@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/molecules/Header';
 import CardOrderDetails from '../components/molecules/CardOrderDetails';
@@ -10,15 +10,10 @@ export default function OrdersDetails() {
 
   const { id } = useParams();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setOrderById(true);
     setPId(id);
   }, [id, setOrderById, setPId]);
-
-  // const productsData = ordersByIdData.map(({ products }) => (products));
-
-  // console.log('productsData ->', productsData);
-  // console.log('ordersByIdData ->', ordersByIdData);
 
   return (
     <div>
@@ -52,6 +47,16 @@ export default function OrdersDetails() {
           price={ +price }
         />
       ))}
+
+      <div>
+        <h2
+          data-testid="customer_order_details__element-order-total-price"
+        >
+          { ordersByIdData.length > 0 && ordersByIdData[0].totalPrice.replace(/\./, ',')}
+        </h2>
+
+      </div>
+
     </div>
   );
 }
