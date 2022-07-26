@@ -32,9 +32,9 @@ export default function CardOrderDetails({
         </h2>
         <Button
           nameView="MARCAR COMO ENTREGUE"
-          disabled={ false }
+          disabled
           testid="customer_order_details__button-delivery-check"
-          // onClick={ () => click(id) }
+          onClick={ () => console.log('👷  em manutenção') }
           name="btnEntregue"
         />
       </div>
