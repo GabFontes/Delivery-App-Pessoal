@@ -39,7 +39,7 @@ export default function CardProductsDetails({
         <h4 data-testid={ `customer_order_details__element-order-table-quantity-${i}` }>
           { quantityProduct.quantity }
         </h4>
-        <h4 data-testid={ `customer_order_details__element-order-total-price-${i}` }>
+        <h4 data-testid={ `customer_order_details__element-order-table-unit-price-${i}` }>
           { price.toFixed(2).toString().replace('.', ',') }
         </h4>
         <h4 data-testid={ `customer_order_details__element-order-table-sub-total-${i}` }>
