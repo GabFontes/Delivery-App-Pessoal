@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import CardOrders from '../components/molecules/CardOrders';
 import Header from '../components/molecules/Header';
 import Context from '../context/Context';
@@ -7,12 +7,11 @@ export default function Orders() {
   const {
     setOrders,
     ordersData,
-  } = React.useContext(Context);
+  } = useContext(Context);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setOrders(true);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setOrders]);
 
   return (
     <div>
