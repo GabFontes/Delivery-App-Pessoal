@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Context from '../../context/Context';
-import { deleteKeyLocal } from '../../services/setUserLocal';
+import { setProduct } from '../../services/AddProducts';
+import { deleteKeyLocal, setIsLogger } from '../../services/setUserLocal';
 import Button from '../atoms/Button';
 
 export default function Header() {
@@ -18,7 +19,6 @@ export default function Header() {
 
   // CONSTANTES -----------------------------------------
   const history = useHistory();
-  const { user: { name, id } } = userData;
 
   // FUNÇÕES --------------------------------------------
   const handleProducts = async () => {
@@ -26,11 +26,13 @@ export default function Header() {
   };
 
   const handleOrders = async () => {
-    history.push(`/customer/order/${id}`);
+    history.push('/customer/orders');
   };
 
   const handleLogOut = async () => {
     deleteKeyLocal('user');
+    setIsLogger(false);
+    setProduct([]);
     history.push('/login'); // apagar token
   };
 
@@ -49,7 +51,7 @@ export default function Header() {
         name="meus-pedidos"
       />
       <div data-testid={ testidUserName }>
-        { name }
+        {!userData.user ? <h2>Carregando</h2> : userData.user.name }
       </div>
       <Button
         nameView="SAIR"
