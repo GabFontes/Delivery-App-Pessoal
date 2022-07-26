@@ -4,12 +4,13 @@ import InputText from '../atoms/InputText';
 import Button from '../atoms/Button';
 import Context from '../../context/Context';
 import PostLogin from '../../services/PostLogin';
+import { setIsLogger, saveUser } from '../../services/setUserLocal';
 
 export default function LoginForm() {
   // ESTADOS -----------------------------------
   const {
     setlogin,
-    setUserData,
+    // setUserData,
   } = useContext(Context);
 
   // CONSTANTES ---------------------------------
@@ -55,8 +56,14 @@ export default function LoginForm() {
 
     if (!data.user) return setErrorMsg(true);
 
-    setUserData(data);
+    // setUserData(data);
+    const { name, email, role } = data.user;
+    const { token } = data;
+    console.log(data);
+    const user = { name, email, role };
+    saveUser({ user, token });
     setlogin(true);
+    setIsLogger(true);
 
     // console.log('role:', data.user.role);
 
