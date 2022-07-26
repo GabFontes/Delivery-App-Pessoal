@@ -5,7 +5,6 @@ const GetAllSalesService = async (req, res, next) => {
     const sales = await SalesService.getAll(req.user);
     return res.status(200).json(sales);
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };

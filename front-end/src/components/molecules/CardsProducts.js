@@ -10,7 +10,7 @@ export default function CardsProducts({
   id,
 }) {
   return (
-    <div>
+    <div data-testid="product">
       <p data-testid={ `customer_products__element-card-price-${id}` }>
         R$
         { precoProduto.toString().replace(/\./, ',') }

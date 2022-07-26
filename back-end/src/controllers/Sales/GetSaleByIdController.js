@@ -6,7 +6,7 @@ const GetSaleByIdController = async (req, res, next) => {
     const sale = await SalesService.getById(id);
     return res.status(200).json(sale);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     next(err);
   }
 };

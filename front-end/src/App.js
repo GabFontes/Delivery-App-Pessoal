@@ -5,6 +5,8 @@ import Register from './Pages/Register';
 import Customer from './Pages/Customer';
 import Checkout from './Pages/Checkout';
 import Administrator from './Pages/Administrator';
+import OrdersDetails from './Pages/OrdersDetails';
+import Orders from './Pages/Orders';
 import Seller from './Pages/Seller';
 import NotFound from './Pages/NotFound';
 import './styles/App.css';
@@ -18,6 +20,8 @@ function App() {
         <Route exact path="/register" component={ Register } />
         <Route exact path="/customer/products" component={ Customer } />
         <Route exact path="/customer/checkout" component={ Checkout } />
+        <Route exact path="/customer/orders" component={ Orders } />
+        <Route exact path="/customer/orders/:id" component={ OrdersDetails } />
         <Route exact path="/seller/orders" component={ Seller } />
         <Route exact path="/admin/manage" component={ Administrator } />
         <Route component={ NotFound } />

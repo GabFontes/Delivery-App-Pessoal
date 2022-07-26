@@ -5,7 +5,6 @@ const CreateUserController = async (req, res, next) => {
     const user = await UserService.create(req.body);
     return res.status(201).json(user);
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };

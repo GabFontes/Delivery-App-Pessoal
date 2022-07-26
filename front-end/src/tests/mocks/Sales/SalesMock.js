@@ -2,7 +2,7 @@
 // precisa do token
 // GET
 // === /sales ===
-const getAllSalesByUserIdResponse = [{
+export const getAllSalesByUserIdResponse = [{
   id: 3,
   userId: 4,
   sellerId: 2,
@@ -29,7 +29,7 @@ const getAllSalesByUserIdResponse = [{
 // precisa de token
 // GET
 // === /sales/*id* ===
-const getSaleByIdResponse = {
+export const getSaleByIdResponse = {
   id: 4,
   userId: 4,
   sellerId: 2,
@@ -77,7 +77,7 @@ const getSaleByIdResponse = {
 // POST
 // === /sales ===
 
-const CreateSaleRequest = {
+export const CreateSaleRequest = {
   sale: {
     sellerId: 2,
     totalPrice: '20.00',
@@ -94,7 +94,7 @@ const CreateSaleRequest = {
   }],
 };
 
-const CreateSaleResponse = {
+export const CreateSaleResponse = {
   id: 14,
   userId: 4,
   sellerId: 2,
@@ -142,12 +142,12 @@ const CreateSaleResponse = {
 // PATCH
 // === /sales/*id* ===
 
-const UpdateSalesRequest = {
-  status: 'Preparando',
-};
+// const UpdateSalesRequest = {
+//   status: 'Preparando',
+// };
 // patch status response
 
-const UpdateSalesResponse = {
+export const UpdateSalesResponse = {
   id: 14,
   userId: 4,
   sellerId: 2,
@@ -158,11 +158,11 @@ const UpdateSalesResponse = {
   status: 'Preparando',
 };
 
-export default {
-  UpdateSalesRequest,
-  CreateSaleRequest,
-  CreateSaleResponse,
-  UpdateSalesResponse,
-  getAllSalesByUserIdResponse,
-  getSaleByIdResponse,
-};
+// export default {
+//   UpdateSalesRequest,
+//   CreateSaleRequest,
+//   CreateSaleResponse,
+//   UpdateSalesResponse,
+//   getAllSalesByUserIdResponse,
+//   getSaleByIdResponse,
+// };

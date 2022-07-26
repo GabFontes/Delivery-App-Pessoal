@@ -4,12 +4,12 @@ import InputText from '../atoms/InputText';
 import Button from '../atoms/Button';
 import Context from '../../context/Context';
 import PostRegister from '../../services/PostRegister';
+import { setIsLogger, saveUser } from '../../services/setUserLocal';
 
 export default function RegisterForm() {
   // ESTADOS -----------------------------------
   const {
     setlogin,
-    setUserData,
   } = useContext(Context);
 
   // CONSTANTES ---------------------------------
@@ -69,9 +69,14 @@ export default function RegisterForm() {
     if (!data.user) {
       return setErrorMsg(true);
     }
+    const { name, email, role } = data.user;
+    const { token } = data;
     // Redirecionamento de rota -------------
-    setUserData(data);
+
+    saveUser({ name, email, role, token });
+    // setUserData(data);
     setlogin(true);
+    setIsLogger(true);
     history.push('/customer/products');
   };
 
