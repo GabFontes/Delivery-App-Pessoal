@@ -13,13 +13,14 @@ const registerResponse = {
   I6MTY1ODUxNzE3NCwic3ViIjoiNCJ9.rYM6SpvXPgL2LAX__H8Nbp_pCbMzAISuDhMkNXQuAHs`,
 };
 
-const registerRequest = {
+export const registerRequest = {
   name: 'Thauler Mayrink',
   email: 'thauler98@email.com',
   password: 'testando',
 };
 
-module.exports = {
-  registerRequest,
-  registerResponse,
-};
+export default registerResponse;
+// module.exports = {
+//   registerRequest,
+//   registerResponse,
+// };
