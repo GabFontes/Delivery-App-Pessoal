@@ -55,13 +55,10 @@ export default function LoginForm() {
     const data = await PostLogin({ email: userEmail, password: userPassword });
 
     if (!data.user) return setErrorMsg(true);
-
-    // setUserData(data);
     const { name, email, role } = data.user;
     const { token } = data;
-    console.log(data);
-    const user = { name, email, role };
-    saveUser({ user, token });
+    // setUserData(data);
+    saveUser({ name, email, role, token });
     setlogin(true);
     setIsLogger(true);
 
